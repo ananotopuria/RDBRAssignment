@@ -1,0 +1,195 @@
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("./fonts/HelveticaNeue.ttc");
+  src: url("../fonts/HelveticaNeue-01.ttf");
+  src: url("../fonts/HelveticaNeue-Bold-02.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+body {
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  font-family: "HelveticaNeue", sans-serif;
+}
+
+.wrapper {
+  display: flex;
+}
+
+main {
+  flex: 1;
+}
+
+.right {
+  min-height: 100vh;
+  width: 40%;
+  background-color: #fff;
+}
+
+.btn {
+  background-color: #fff;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 5rem;
+  left: 5rem;
+}
+
+.btn-icon {
+  height: 20px;
+  width: 27px;
+  color: #2e2e2e;
+}
+.head-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.title {
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 100%;
+  padding-top: 5rem;
+  vertical-align: text-top;
+  display: inline-block;
+}
+.page-num {
+  color: #1a1a1a;
+  font-size: 1.8rem;
+  font-weight: 400;
+  padding-top: 5rem;
+}
+.container {
+  margin: 0 auto;
+  max-width: 80rem;
+}
+
+.line {
+  border-bottom: 1px solid #1a1a1a;
+  padding-top: 1rem;
+}
+
+/* cta */
+
+/* .cta {
+  background-color: #fff; 
+  width: 102.6rem;
+  height: 75rem;
+   margin: 0 auto;
+} */
+
+.cta-form-full {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  /* padding: 5.6rem; */
+  padding-top: 6rem;
+  font-size: 1.6rem;
+}
+
+.name label,
+.surname label,
+.image-upload label,
+.email label,
+.about-me-f label,
+.number label {
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  color: rgba(46, 46, 46, 1);
+}
+
+.name input,
+.surname input,
+.email input,
+.number input,
+.about-me-f input {
+  border: 1px solid rgba(188, 188, 188, 1);
+  border-radius: 8px;
+  margin-top: 1rem;
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.6rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.name p,
+.surname p,
+.email p,
+.number p {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #2e2e2e;
+}
+.name,
+.surname {
+  flex: 0 1 400px;
+}
+.image-upload {
+  margin: 4rem 0;
+}
+#fileInput {
+  display: none;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #0e80bf;
+}
+.about-me-f input {
+  width: 100%;
+  height: 15rem;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+.cta-form-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  padding-top: 4rem;
+  font-size: 1.6rem;
+  margin-bottom: 3rem;
+}
+
+.next-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.next {
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #6b40e3;
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  padding: 12px 35px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+aside {
+  position: relative;
+}
+.l-logo {
+  position: absolute;
+  left: 5rem;
+  bottom: 5rem;
+}

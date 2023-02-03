@@ -1,0 +1,52 @@
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("/assets/fonts/HelveticaNeue.ttc");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+body {
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  display: flex;
+}
+
+main {
+  flex: 1;
+}
+
+.right {
+  min-height: 100vh;
+  width: 40%;
+  background-color: #fff;
+}
+
+.btn {
+  background-color: #fff;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 5rem;
+  left: 5rem;
+}
+
+.btn-icon {
+  height: 20px;
+  width: 27px;
+  color: #2e2e2e;
+}
