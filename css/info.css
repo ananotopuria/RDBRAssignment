@@ -85,22 +85,19 @@ main {
 
 /* cta */
 
-/* .cta {
-  background-color: #fff; 
-  width: 102.6rem;
-  height: 75rem;
-   margin: 0 auto;
-} */
-
 .cta-form-full {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 5rem;
-  /* padding: 5.6rem; */
   padding-top: 6rem;
   font-size: 1.6rem;
 }
-
+.full-name {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+}
 .name label,
 .surname label,
 .image-upload label,
@@ -112,12 +109,11 @@ main {
   font-size: 1.6rem;
   color: rgba(46, 46, 46, 1);
 }
-
 .name input,
 .surname input,
 .email input,
 .number input,
-.about-me-f input {
+.about-me-f textarea {
   border: 1px solid rgba(188, 188, 188, 1);
   border-radius: 8px;
   margin-top: 1rem;
@@ -126,7 +122,6 @@ main {
   font-size: 1.6rem;
   color: rgba(0, 0, 0, 0.6);
 }
-
 .name p,
 .surname p,
 .email p,
@@ -139,9 +134,7 @@ main {
 .surname {
   flex: 0 1 400px;
 }
-.image-upload {
-  margin: 4rem 0;
-}
+
 #fileInput {
   display: none;
 }
@@ -163,7 +156,6 @@ main {
   display: flex;
   flex-direction: column;
   gap: 5rem;
-  padding-top: 4rem;
   font-size: 1.6rem;
   margin-bottom: 3rem;
 }
@@ -192,4 +184,21 @@ aside {
   position: absolute;
   left: 5rem;
   bottom: 5rem;
+}
+form {
+  position: relative;
+}
+span {
+  position: absolute;
+  right: 1.5rem;
+  top: 4rem;
+  color: red;
+}
+
+.position {
+  position: relative;
+}
+
+.icon {
+  color: greenyellow;
 }

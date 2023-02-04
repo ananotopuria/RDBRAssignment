@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="imgs/icon.jpg" type="image/icon" />
     <link rel="stylesheet" href="css/info.css" />
+    <script defer src="js/script.js"></script>
     <title>REDBERRY - personal info</title>
   </head>
   <body>
@@ -34,61 +35,69 @@
           </div>
           <div class="line"></div>
         </section>
-
         <section class="cta">
-          <form class="cta-form-full" action="#">
-            <div class="name">
-              <label for="name">სახელი</label>
-              <input id="name" type="text" placeholder="ანზორ" />
-              <p>მინიმუმ 2 ასო, ქართული ასოები</p>
+          <form class="cta-form-full" id="form" action="#">
+            <div class="full-name">
+              <div class="name position">
+                <label for="name">სახელი</label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="ანზორ"
+                  onkeyup="validateName()"
+                />
+                <span id="name-error"></span>
+                <p>მინიმუმ 2 ასო, ქართული ასოები</p>
+              </div>
+              <div class="surname position">
+                <label for="surname">გვარი</label>
+                <input id="surname" type="text" placeholder="მუმლაძე" />
+                <span id="surname-error"></span>
+                <p>მინიმუმ 2 ასო, ქართული ასოები</p>
+              </div>
             </div>
-            <div class="surname">
-              <label for="surname">გვარი</label>
-              <input id="surname" type="text" placeholder="მუმლაძე" />
-              <p>მინიმუმ 2 ასო, ქართული ასოები</p>
+            <div class="image-upload position">
+              <label for="file">პირადი ფოტოს ატვირთვა:</label>
+              <input id="file" type="file" id="fileInput" />
+              <span id="photo-error"></span>
             </div>
-          </form>
-          <form class="image-upload">
-            <label for="file">პირადი ფოტოს ატვირთვა:</label>
-            <input id="file" type="file" id="fileInput" />
-          </form>
-          <form class="about-me-f">
-            <label for="about-me">ჩემ შესახებ (არასავალდებულო)</label>
-            <input
-              id="about-me"
-              name="about-me"
-              type="text"
-              placeholder="ზოგადი ინფო შენ შესახებ"
-            />
-          </form>
-
-          <!-- email number -->
-
-          <form class="cta-form-contact" action="#">
-            <div class="email">
-              <label for="email">ელ.ფოსტა</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="anzorr666@redberry.ge"
-              />
-              <p>უნდა მთავრდებოდეს @redberry.ge-თ</p>
-            </div>
-            <div class="number">
-              <label for="number">მობილურის ნომერი</label>
-              <input
-                id="number"
-                name="number"
+            <div class="about-me-f position">
+              <label for="about-me">ჩემ შესახებ (არასავალდებულო)</label>
+              <textarea
+                id="about-me"
+                name="about-me"
                 type="text"
-                placeholder="+995 551 12 34 56"
-              />
-              <p>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</p>
+                placeholder="ზოგადი ინფო შენ შესახებ"
+              ></textarea>
+            </div>
+            <div class="cta-form-contact position">
+              <div class="email">
+                <label for="email">ელ.ფოსტა</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="anzorr666@redberry.ge"
+                />
+                <span id="mail-error"></span>
+                <p>უნდა მთავრდებოდეს @redberry.ge-თ</p>
+              </div>
+              <div class="number position">
+                <label for="number">მობილურის ნომერი</label>
+                <input
+                  id="number"
+                  name="number"
+                  type="text"
+                  placeholder="+995 551 12 34 56"
+                />
+                <span id="phone-error"></span>
+                <p>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</p>
+              </div>
+            </div>
+            <div class="next-btn">
+              <button class="next submit-form">შემდეგი</button>
             </div>
           </form>
-          <div class="next-btn">
-            <button class="next submit-form">შემდეგი</button>
-          </div>
         </section>
       </main>
       <aside class="right">
@@ -96,5 +105,13 @@
       </aside>
     </div>
     <footer></footer>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>
