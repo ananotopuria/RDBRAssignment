@@ -50,3 +50,33 @@ main {
   width: 27px;
   color: #2e2e2e;
 }
+
+.head-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.title {
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 100%;
+  padding-top: 5rem;
+  vertical-align: text-top;
+  display: inline-block;
+}
+.page-num {
+  color: #1a1a1a;
+  font-size: 1.8rem;
+  font-weight: 400;
+  padding-top: 5rem;
+}
+.container {
+  margin: 0 auto;
+  max-width: 80rem;
+}
+
+.line {
+  border-bottom: 1px solid #1a1a1a;
+  padding-top: 1rem;
+}

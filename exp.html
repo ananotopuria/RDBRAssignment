@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="imgs/icon.jpg" type="image/icon" />
     <link rel="stylesheet" href="css/exp.css" />
-    <title>REDBERRY - personal info</title>
+    <title>REDBERRY - experience</title>
   </head>
   <body>
     <header>
@@ -26,7 +26,63 @@
       </button>
     </header>
     <div class="wrapper">
-      <main></main>
+      <main class="container">
+        <section class="head">
+          <div class="head-title">
+            <h1 class="title">გამოცდილება</h1>
+            <p class="page-num">2 / 3</p>
+          </div>
+          <div class="line"></div>
+        </section>
+        <form class="cta-form--experience" action="#">
+          <div class="position">
+            <label for="position">თანამდებობა</label>
+            <input
+              id="position"
+              name="position"
+              type="text"
+              placeholder="დეველოპერი, დიზაინერი, ა.შ."
+            />
+            <p>მინიმუმ 2 სიმბოლო</p>
+          </div>
+          <div class="company">
+            <label for="company">დამსაქმებელი</label>
+            <input
+              id="company"
+              name="company"
+              type="text"
+              placeholder="დამსაქმებელი"
+            />
+            <p>მინიმუმ 2 სიმბოლო</p>
+          </div>
+          <div class="exp-date">
+            <div class="st-date">
+              <label for="st">დაწყების რიცხვი</label>
+              <input id="st" name="st" type="date" />
+            </div>
+            <div class="en-date">
+              <label for="en">დამთავრების რიცხვი</label>
+              <input id="en" name="en" type="date" />
+            </div>
+          </div>
+          <div class="exp-descr">
+            <label for="descr">აღწერა</label>
+            <textarea
+              id="descr"
+              name="descr"
+              rows="4"
+              cols="107"
+              placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
+            ></textarea>
+          </div>
+        </form>
+        <div class="line"></div>
+        <button class="exp-btn">მეტი გამოცდილების დამატება</button>
+        <div class="btns">
+          <button class="back">უკან</button>
+          <button class="next">შემდეგი</button>
+        </div>
+      </main>
       <aside class="right"></aside>
     </div>
     <footer></footer>
