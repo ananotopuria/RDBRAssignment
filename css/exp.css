@@ -179,3 +179,12 @@ main {
   border-radius: 6px;
   cursor: pointer;
 }
+
+aside {
+  position: relative;
+}
+.l-logo {
+  position: absolute;
+  left: 5rem;
+  bottom: 5rem;
+}
