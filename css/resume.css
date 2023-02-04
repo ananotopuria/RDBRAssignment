@@ -1,0 +1,116 @@
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url("./fonts/HelveticaNeue.ttc");
+  src: url("../fonts/HelveticaNeue-01.ttf");
+  src: url("../fonts/HelveticaNeue-Bold-02.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+body {
+  background-color: #f9f9f9;
+  font-family: "HelveticaNeue", sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 80rem;
+  border: 1px solid #000000;
+  margin-top: 5rem;
+}
+.section-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 5rem 7rem;
+}
+.photo {
+  grid-column: 2 / 3;
+  grid-row: 1 / span 4;
+}
+.full-name {
+  align-self: center;
+  color: #f93b1d;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.mail {
+  color: #1a1a1a;
+  font-size: 1.6rem;
+  font-weight: 400;
+  align-self: center;
+}
+.phone {
+  color: #1a1a1a;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+.about {
+  align-self: center;
+  font-size: 1.6rem;
+  color: #f93b1d;
+  font-weight: 700;
+}
+.title {
+  font-size: 1.6rem;
+  color: #f93b1d;
+  font-weight: 700;
+}
+.about-me {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #000000;
+}
+
+.line {
+  border-bottom: 1px solid #c8c8c8;
+  margin: 0 5rem;
+}
+
+.section-exp,
+.section-edu {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 7rem 2rem;
+  gap: 1rem;
+}
+
+.positions,
+.ed {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.position,
+.school,
+.status {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.exp-dates,
+.edu-dates {
+  color: #909090;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.exp-p,
+.edu-p {
+  color: #000000;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.l-logo {
+  margin: 7rem;
+}
