@@ -15,6 +15,7 @@ const fileError = document.getElementById(`file-error`);
 function validateName() {
   const nameError = document.getElementById(`name-error`);
   const name = document.getElementById(`name`).value;
+  document.getElementById(`a-name`).innerHTML = name;
   if (name.length < 2 || !/^[ა-ჰ]+$/.test(name)) {
     nameError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
@@ -26,6 +27,7 @@ function validateName() {
 function validateSurname() {
   const surnameError = document.getElementById(`surname-error`);
   const surname = document.getElementById(`surname`).value;
+  document.getElementById(`a-surname`).innerHTML = surname;
   if (surname.length < 2 || !/^[ა-ჰ]+$/.test(surname)) {
     surnameError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
@@ -37,6 +39,7 @@ function validateSurname() {
 function validateEmail() {
   const emailError = document.getElementById(`email-error`);
   const email = document.getElementById(`email`).value;
+  document.getElementById(`a-email`).innerHTML = email;
   const emailRegex = /^[a-zA-Z0-9._-]+@redberry.ge$/;
   if (!emailRegex.test(email)) {
     emailError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
@@ -64,6 +67,7 @@ const phone = document.getElementById(`phone-number`).value;
 function validatePhone(phone) {
   const phoneError = document.getElementById(`phone-error`);
   // const number = parseFloat(phone);
+  document.getElementById(`a-phone`).innerHTML = phone;
   console.log(`Phone: ${phone}`);
   const phoneRegex = /^\+995\d{9}$/;
   console.log(`Phone Regex: ${phoneRegex}`);
@@ -79,3 +83,20 @@ function validatePhone(phone) {
 
 const dlkflsdfk = validatePhone(`+995123456789`);
 console.log(dlkflsdfk);
+
+// ?????????
+
+// const aboutMeTextArea = document.getElementById("about-me");
+
+// aboutMeTextArea.addEventListener("keyup", function () {
+//   const aboutMePreview = document.getElementById("about-me--a");
+//   const aboutMeLabel = document.getElementById("about-label");
+//   aboutMePreview.innerHTML = aboutMeTextArea.value;
+//   // aboutMeTextArea.innerHTML = aboutMeTextArea;
+
+//   if (aboutMeTextArea.value !== "") {
+//     aboutMeLabel.classList.remove("hidden");
+//   } else {
+//     aboutMeLabel.classList.add("hidden");
+//   }
+// });

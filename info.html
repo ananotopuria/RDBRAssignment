@@ -75,6 +75,7 @@
                 name="about-me"
                 type="text"
                 placeholder="ზოგადი ინფო შენ შესახებ"
+                onkeyup="raxdebaraambavia()"
               ></textarea>
             </div>
             <div class="cta-form-contact position">
@@ -99,6 +100,7 @@
                   name="number"
                   type="text"
                   placeholder="+995 551 12 34 56"
+                  onkeyup="validatePhone()"
                 />
                 <span id="phone-error"></span>
                 <p>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</p>
@@ -111,6 +113,21 @@
         </section>
       </main>
       <aside class="right">
+        <div>
+          <div class="section-info">
+            <div class="aside-full--name">
+              <p id="a-name"></p>
+              <p id="a-surname"></p>
+            </div>
+            <img class="photo" src="imgs/Rectangle 9.png" alt="photo" />
+            <p class="mail" id="a-email">@ anzorr666@redberry.ge</p>
+            <p class="phone" id="a-phone">+995 597 63 45 16</p>
+            <div id="a-about">
+              <h2 class="about-label hidden" id="about-label">ჩემ შესახებ</h2>
+              <p class="about-me--a"></p>
+            </div>
+          </div>
+        </div>
         <img class="l-logo" src="imgs/LOGO-12 1.png" alt="logo" />
       </aside>
     </div>
