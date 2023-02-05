@@ -42,6 +42,7 @@
                 <label for="name">სახელი</label>
                 <input
                   id="name"
+                  class="input-field"
                   type="text"
                   placeholder="ანზორ"
                   onkeyup="validateName()"
@@ -51,7 +52,13 @@
               </div>
               <div class="surname position">
                 <label for="surname">გვარი</label>
-                <input id="surname" type="text" placeholder="მუმლაძე" />
+                <input
+                  id="surname"
+                  class="input-field"
+                  type="text"
+                  placeholder="მუმლაძე"
+                  onkeyup="validateSurname()"
+                />
                 <span id="surname-error"></span>
                 <p>მინიმუმ 2 ასო, ქართული ასოები</p>
               </div>
@@ -75,17 +82,20 @@
                 <label for="email">ელ.ფოსტა</label>
                 <input
                   id="email"
+                  class="input-field"
                   name="email"
                   type="email"
                   placeholder="anzorr666@redberry.ge"
+                  onkeyup="validateEmail()"
                 />
-                <span id="mail-error"></span>
+                <span id="email-error"></span>
                 <p>უნდა მთავრდებოდეს @redberry.ge-თ</p>
               </div>
               <div class="number position">
                 <label for="number">მობილურის ნომერი</label>
                 <input
-                  id="number"
+                  id="phone-number"
+                  class="input-field"
                   name="number"
                   type="text"
                   placeholder="+995 551 12 34 56"
