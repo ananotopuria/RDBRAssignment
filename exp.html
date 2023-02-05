@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="imgs/icon.jpg" type="image/icon" />
     <link rel="stylesheet" href="css/exp.css" />
+    <script defer src="js/exp.js"></script>
     <title>REDBERRY - experience</title>
   </head>
   <body>
@@ -35,24 +36,28 @@
           <div class="line"></div>
         </section>
         <form class="cta-form--experience" action="#">
-          <div class="position">
+          <div class="position posit">
             <label for="position">თანამდებობა</label>
             <input
               id="position"
               name="position"
               type="text"
               placeholder="დეველოპერი, დიზაინერი, ა.შ."
+              onkeyup="validatePosition()"
             />
+            <span id="position-error"></span>
             <p>მინიმუმ 2 სიმბოლო</p>
           </div>
-          <div class="company">
+          <div class="company posit">
             <label for="company">დამსაქმებელი</label>
             <input
               id="company"
               name="company"
               type="text"
               placeholder="დამსაქმებელი"
+              onkeyup="validateCompany()"
             />
+            <span id="company-error"></span>
             <p>მინიმუმ 2 სიმბოლო</p>
           </div>
           <div class="exp-date">
@@ -65,7 +70,7 @@
               <input id="en" name="en" type="date" />
             </div>
           </div>
-          <div class="exp-descr">
+          <div class="exp-descr posit">
             <label for="descr">აღწერა</label>
             <textarea
               id="descr"
@@ -73,7 +78,9 @@
               rows="4"
               cols="107"
               placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
+              onkeyup="validateDescr()"
             ></textarea>
+            <span id="descr-error"></span>
           </div>
         </form>
         <div class="line"></div>
@@ -88,5 +95,13 @@
       </aside>
     </div>
     <footer></footer>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>

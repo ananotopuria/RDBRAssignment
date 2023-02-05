@@ -188,3 +188,21 @@ aside {
   left: 5rem;
   bottom: 5rem;
 }
+
+span {
+  position: absolute;
+  right: 1.5rem;
+  top: 4rem;
+  color: red;
+}
+
+.posit {
+  position: relative;
+}
+
+.icon-warning {
+  color: #ff0000;
+}
+.icon-check {
+  color: #0ea300;
+}
