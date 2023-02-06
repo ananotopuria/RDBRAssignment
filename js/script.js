@@ -1,4 +1,4 @@
-"use strict";
+("use strict");
 
 const fileError = document.getElementById(`file-error`);
 
@@ -79,3 +79,45 @@ const loadFile = function (event) {
     document.getElementById(`imgBox`).appendChild(img);
   };
 };
+
+const fillInputValues = function () {
+  const name = document.getElementById(`name`);
+  const surname = document.getElementById(`surname`);
+  const infoFromLocalStroage = JSON.parse(localStorage.getItem(`info`));
+  if (infoFromLocalStroage.name) {
+    name.value = infoFromLocalStroage.name;
+  }
+  if (infoFromLocalStroage.surname) {
+    surname.value = infoFromLocalStroage.surname;
+  }
+};
+
+function saveFormToLocalStorage() {
+  // Save all form items to local storage
+  const data = {
+    name: document.getElementById(`name`).value,
+    surname: document.getElementById(`surname`).value,
+  };
+  // localStorage.setItem("name", document.getElementById("name").value);
+  localStorage.setItem(`info`, JSON.stringify(data));
+}
+
+// when page is loaded fill input values from local storage
+window.addEventListener(`load`, (event) => {
+  console.log(`page is fully loaded`);
+  fillInputValues();
+});
+
+document.getElementById(`next-section`).addEventListener(`click`, function () {
+  console.log("Redirect to next section");
+  saveFormToLocalStorage();
+  location.href = `exp.html`;
+});
+
+// const redirectToPage = function (selector, route) {
+//   const addNewRecord = document.querySelector(selector);
+//   addNewRecord.onclick = function (e) {
+//     e.preventDefault();
+//     location.href = route;
+//   };
+// };

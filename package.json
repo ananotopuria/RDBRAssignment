@@ -1,0 +1,22 @@
+{
+  "name": "rdbr-assignment",
+  "version": "1.0.0",
+  "description": "Redberry bootcamp assignment <br>\r Live URL: https://rdbr-bootcamp-assignment.netlify.app/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ananotopuria/RDBRAssignment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ananotopuria/RDBRAssignment/issues"
+  },
+  "homepage": "https://github.com/ananotopuria/RDBRAssignment#readme",
+  "dependencies": {
+    "ionicons": "^6.1.1"
+  }
+}
