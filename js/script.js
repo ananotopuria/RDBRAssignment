@@ -1,17 +1,5 @@
 "use strict";
 
-// localStorage.setItem(`keyName`, inpute.value);
-
-// const name = document.getElementById(`name`);
-// const surname = document.getElementById(`surname`);
-// const file = document.getElementById(`file`);
-// const aboutMe = document.getElementById(`about-me`);
-// const form = document.getElementById(`form`);
-
-// form.addEventListener(`submit`, (e = {
-//     e.preventDefault
-// }));
-
 const fileError = document.getElementById(`file-error`);
 
 function validateName() {
@@ -43,77 +31,51 @@ function validateEmail() {
   const email = document.getElementById(`email`).value;
   document.getElementById(`a-email`).innerHTML = email;
   const emailRegex = /^[a-zA-Z0-9._-]+@redberry.ge$/;
+  const displayEmailIcon = document.getElementById(`a-email--icon`);
   if (!emailRegex.test(email)) {
     emailError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
   }
+  displayEmailIcon.classList.remove(`hidden`);
   emailError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
   return true;
 }
 
-// function validatePhone() {
-//   const phoneError = document.getElementById(`phone-error`);
-//   const phone = document.getElementById(`number`).value;
-//   const phoneRegex = /^\\+995\\d{9}$/;
-//   if (!phoneRegex.test(phone)) {
-//     phoneError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
-//     return false;
-//   }
-
-//   phoneError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
-//   return true;
-// }
-
-const phone = document.getElementById(`phone-number`).value;
-
 function validatePhone() {
+  const phoneRegex = /^\+995\d{9}$|^\+995\s\d{3}\s\d{3}\s\d{3}$/;
   const phoneError = document.getElementById(`phone-error`);
-  // const number = parseFloat(phone);
+  const phone = document.getElementById(`phone-number`).value;
   document.getElementById(`a-phone`).innerHTML = phone;
-  // console.log(`Phone: ${phone}`);
-  const phoneRegex = /^\+995\d{9}$/;
-  // console.log(`Phone Regex: ${phoneRegex}`);
+  const displayPhoneIcon = document.getElementById(`a-phone--icon`);
   if (!phoneRegex.test(phone)) {
-    // console.log(`Phone does not match pattern`);
     phoneError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
   }
-  // console.log(`Phone matches pattern`);
+  displayPhoneIcon.classList.remove(`hidden`);
   phoneError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
   return true;
 }
 
-// ?????????
-
-// const aboutMeTextArea = document.getElementById("about-me");
-
-// aboutMeTextArea.addEventListener("keyup", function () {
-//   const aboutMePreview = document.getElementById("about-me--a");
-//   const aboutMeLabel = document.getElementById("about-label");
-//   aboutMePreview.innerHTML = aboutMeTextArea.value;
-//   // aboutMeTextArea.innerHTML = aboutMeTextArea;
-
-//   if (aboutMeTextArea.value !== "") {
-//     aboutMeLabel.classList.remove("hidden");
-//   } else {
-//     aboutMeLabel.classList.add("hidden");
-//   }
-// });
+function textArea() {
+  const aboutMeLabel = document.getElementById(`about-label`);
+  const aboutMeTextArea = document.getElementById(`about-me`).value;
+  document.getElementById(`about-me--a`).innerHTML = aboutMeTextArea;
+  if (aboutMeTextArea === "") {
+    aboutMeLabel.classList.add(`hidden`);
+  } else {
+    aboutMeLabel.classList.remove(`hidden`);
+  }
+}
 
 const imgBox = document.getElementById(`imgBox`);
-
-// const loadFile = function (event) {
-//   imgBox.style.backgroundImage = `url(${URL.createObjectURL(
-//     event.target.files[0]
-//   )})`;
-// };
 
 const loadFile = function (event) {
   const img = new Image();
   img.src = URL.createObjectURL(event.target.files[0]);
-  img.style.width = "300px";
-  img.style.height = "auto";
+  img.style.width = `250px`;
+  img.style.height = `auto`;
+  img.style.borderRadius = `50%`;
   img.onload = function () {
-    document.getElementById("imgBox").appendChild(img);
+    document.getElementById(`imgBox`).appendChild(img);
   };
 };

@@ -234,11 +234,17 @@ aside {
   font-size: 1.6rem;
   font-weight: 400;
   align-self: center;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
 }
 .phone {
   color: #1a1a1a;
   font-size: 1.6rem;
   font-weight: 400;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
 }
 .about {
   align-self: center;
@@ -258,7 +264,7 @@ aside {
 }
 
 .about-label {
-  align-self: center;
+  /* align-self: center; */
   font-size: 1.6rem;
   color: #f93b1d;
   font-weight: 700;
@@ -280,4 +286,15 @@ aside {
 #imgBox {
   grid-column: 2 / 3;
   grid-row: 1 / span 4;
+}
+
+.a-icon {
+  color: #898989;
+  width: 1.2rem;
+}
+
+.aside-about {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }

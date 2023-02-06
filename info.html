@@ -86,7 +86,7 @@
                 name="about-me"
                 type="text"
                 placeholder="ზოგადი ინფო შენ შესახებ"
-                onkeyup="raxdebaraambavia()"
+                onkeyup="textArea()"
               ></textarea>
             </div>
             <div class="cta-form-contact position">
@@ -130,12 +130,26 @@
               <p id="a-name"></p>
               <p id="a-surname"></p>
             </div>
-            <p id="imgBox" class=".photo"></p>
-            <p class="mail" id="a-email"></p>
-            <p class="phone" id="a-phone"></p>
-            <div id="a-about">
+            <p id="imgBox" class="photo"></p>
+            <div class="mail">
+              <ion-icon
+                id="a-email--icon"
+                class="a-icon hidden"
+                name="at"
+              ></ion-icon>
+              <p id="a-email"></p>
+            </div>
+            <div class="phone">
+              <ion-icon
+                id="a-phone--icon"
+                class="a-icon hidden"
+                name="call"
+              ></ion-icon>
+              <p id="a-phone"></p>
+            </div>
+            <div class="aside-about" id="a-about">
               <h2 class="about-label hidden" id="about-label">ჩემ შესახებ</h2>
-              <p class="about-me--a"></p>
+              <p class="textarea-about" id="about-me--a"></p>
             </div>
           </div>
         </div>
