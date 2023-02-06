@@ -1,5 +1,7 @@
 "use strict";
 
+// localStorage.setItem(`keyName`, inpute.value);
+
 // const name = document.getElementById(`name`);
 // const surname = document.getElementById(`surname`);
 // const file = document.getElementById(`file`);
@@ -64,25 +66,22 @@ function validateEmail() {
 
 const phone = document.getElementById(`phone-number`).value;
 
-function validatePhone(phone) {
+function validatePhone() {
   const phoneError = document.getElementById(`phone-error`);
   // const number = parseFloat(phone);
   document.getElementById(`a-phone`).innerHTML = phone;
-  console.log(`Phone: ${phone}`);
+  // console.log(`Phone: ${phone}`);
   const phoneRegex = /^\+995\d{9}$/;
-  console.log(`Phone Regex: ${phoneRegex}`);
+  // console.log(`Phone Regex: ${phoneRegex}`);
   if (!phoneRegex.test(phone)) {
-    console.log(`Phone does not match pattern`);
+    // console.log(`Phone does not match pattern`);
     phoneError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
   }
-  console.log(`Phone matches pattern`);
+  // console.log(`Phone matches pattern`);
   phoneError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
   return true;
 }
-
-const dlkflsdfk = validatePhone(`+995123456789`);
-console.log(dlkflsdfk);
 
 // ?????????
 
@@ -100,3 +99,21 @@ console.log(dlkflsdfk);
 //     aboutMeLabel.classList.add("hidden");
 //   }
 // });
+
+const imgBox = document.getElementById(`imgBox`);
+
+// const loadFile = function (event) {
+//   imgBox.style.backgroundImage = `url(${URL.createObjectURL(
+//     event.target.files[0]
+//   )})`;
+// };
+
+const loadFile = function (event) {
+  const img = new Image();
+  img.src = URL.createObjectURL(event.target.files[0]);
+  img.style.width = "300px";
+  img.style.height = "auto";
+  img.onload = function () {
+    document.getElementById("imgBox").appendChild(img);
+  };
+};

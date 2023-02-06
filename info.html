@@ -64,8 +64,19 @@
               </div>
             </div>
             <div class="image-upload position">
-              <label for="file">პირადი ფოტოს ატვირთვა:</label>
-              <input id="file" type="file" id="fileInput" />
+              <label for="file"
+                >პირადი ფოტოს ატვირთვა &nbsp; &nbsp;
+                <p class="img-button">ატვირთვა</p></label
+              >
+              <input
+                id="file"
+                type="file"
+                accept="image/*"
+                name="image"
+                id="file"
+                style="display: none"
+                onchange="loadFile(event)"
+              />
               <span id="photo-error"></span>
             </div>
             <div class="about-me-f position">
@@ -112,16 +123,16 @@
           </form>
         </section>
       </main>
-      <aside class="right">
+      <aside class="right container-aside">
         <div>
           <div class="section-info">
             <div class="aside-full--name">
               <p id="a-name"></p>
               <p id="a-surname"></p>
             </div>
-            <img class="photo" src="imgs/Rectangle 9.png" alt="photo" />
+            <p id="imgBox" class=".photo"></p>
             <p class="mail" id="a-email"></p>
-            <p class="phone" id="a-phone">+995 597 63 45 16</p>
+            <p class="phone" id="a-phone"></p>
             <div id="a-about">
               <h2 class="about-label hidden" id="about-label">ჩემ შესახებ</h2>
               <p class="about-me--a"></p>

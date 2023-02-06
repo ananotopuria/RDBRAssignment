@@ -98,6 +98,7 @@ main {
   flex-direction: row;
   gap: 5rem;
 }
+
 .name label,
 .surname label,
 .image-upload label,
@@ -211,16 +212,15 @@ span {
 }
 
 /* aside part */
-
+aside {
+  position: relative;
+}
 .section-info {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 5rem 7rem;
+  grid-template-columns: 3fr 1fr;
+  padding: 5rem 5rem;
 }
-.photo {
-  grid-column: 2 / 3;
-  grid-row: 1 / span 4;
-}
+
 .aside-full--name {
   color: #f93b1d;
   font-size: 3rem;
@@ -266,4 +266,18 @@ span {
 
 .hidden {
   display: none;
+}
+
+.img-button {
+  display: inline-block;
+  background-color: #0e80bf;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 0.4rem;
+}
+
+#imgBox {
+  grid-column: 2 / 3;
+  grid-row: 1 / span 4;
 }

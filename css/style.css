@@ -1,6 +1,8 @@
 @font-face {
   font-family: "HelveticaNeue";
-  src: url("/assets/fonts/HelveticaNeue.ttc");
+  src: url("./fonts/HelveticaNeue.ttc");
+  src: url("../fonts/HelveticaNeue-01.ttf");
+  src: url("../fonts/HelveticaNeue-Bold-02.ttf");
 }
 
 * {
@@ -21,7 +23,7 @@ body {
   width: 100vw;
   height: 100vh;
   background-size: cover;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: "HelveticaNeue", sans-serif;
 }
 .container {
   margin: 0 auto;
