@@ -3,8 +3,8 @@
 const fileError = document.getElementById(`file-error`);
 
 function validateName() {
-  const nameError = document.getElementById(`name-error`);
   const name = document.getElementById(`name`).value;
+  const nameError = document.getElementById(`name-error`);
   document.getElementById(`a-name`).innerHTML = name;
   if (name.length < 2 || !/^[ა-ჰ]+$/.test(name)) {
     nameError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
@@ -114,10 +114,23 @@ document.getElementById(`next-section`).addEventListener(`click`, function () {
   location.href = `exp.html`;
 });
 
-// const redirectToPage = function (selector, route) {
-//   const addNewRecord = document.querySelector(selector);
-//   addNewRecord.onclick = function (e) {
-//     e.preventDefault();
-//     location.href = route;
-//   };
-// };
+const redirectToPage = function (selector, route) {
+  const addNewRecord = document.querySelector(selector);
+  addNewRecord.onclick = function (e) {
+    e.preventDefault();
+    location.href = route;
+    localStorage.clear();
+  };
+};
+
+redirectToPage(`.btn-back`, `./index.html`);
+
+const redirectToNextPage = function (selector, route) {
+  const addNewRecord = document.querySelector(selector);
+  addNewRecord.onclick = function (e) {
+    e.preventDefault();
+    location.href = route;
+  };
+};
+
+redirectToNextPage(`.submit-form`, `./exp.html`);

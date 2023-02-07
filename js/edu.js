@@ -23,3 +23,24 @@ function validateDescr() {
   descrError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
   return true;
 }
+
+const redirectToPage = function (selector, route) {
+  const addNewRecord = document.querySelector(selector);
+  addNewRecord.onclick = function (e) {
+    e.preventDefault();
+    location.href = route;
+    localStorage.clear();
+  };
+};
+
+redirectToPage(`.prev`, `./index.html`);
+
+const redirectToPrevPage = function (selector, route) {
+  const addNewRecord = document.querySelector(selector);
+  addNewRecord.onclick = function (e) {
+    e.preventDefault();
+    location.href = route;
+  };
+};
+
+redirectToPrevPage(`.prev`, `./exp.html`);

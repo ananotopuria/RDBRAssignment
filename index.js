@@ -1,4 +1,4 @@
-export const redirectToPage = function (selector, route) {
+const redirectToPage = function (selector, route) {
   const addNewRecord = document.querySelector(selector);
   addNewRecord.onclick = function (e) {
     e.preventDefault();
@@ -20,4 +20,12 @@ removeALLFromLocalStorage = function () {
 
 removeFromLocalStorage = function (key) {
   localStorage.clear();
+};
+
+const redirectToNextPage = function (selector, route) {
+  const addNewRecord = document.querySelector(selector);
+  addNewRecord.onclick = function (e) {
+    e.preventDefault();
+    location.href = route;
+  };
 };

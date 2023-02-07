@@ -35,3 +35,34 @@ function validateDescr() {
   descrError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
   return true;
 }
+
+const redirectToPage = function (selector, route) {
+  const addNewRecord = document.querySelector(selector);
+  addNewRecord.onclick = function (e) {
+    e.preventDefault();
+    location.href = route;
+    localStorage.clear();
+  };
+};
+
+redirectToPage(`.btn-back`, `./index.html`);
+
+const redirectToNextPage = function (selector, route) {
+  const addNewRecord = document.querySelector(selector);
+  addNewRecord.onclick = function (e) {
+    e.preventDefault();
+    location.href = route;
+  };
+};
+
+redirectToNextPage(`.submit-form`, `./edu.html`);
+
+const redirectToPrevPage = function (selector, route) {
+  const addNewRecord = document.querySelector(selector);
+  addNewRecord.onclick = function (e) {
+    e.preventDefault();
+    location.href = route;
+  };
+};
+
+redirectToPrevPage(`.prev`, `./info.html`);
