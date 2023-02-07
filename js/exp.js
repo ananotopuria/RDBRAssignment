@@ -107,4 +107,4 @@ redirectToPrevPage(`.prev`, `./info.html`);
 // console.log(specificValue);
 
 const data = JSON.parse(localStorage.getItem(`dataKey`));
-const { name, surname, about, email, phone } = data;
+// const { name, surname, about, email, phone } = data;

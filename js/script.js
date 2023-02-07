@@ -113,29 +113,20 @@ const fillInputValues = function () {
   const about = document.getElementById(`about-me`);
 
   const infoFromLocalStroage = JSON.parse(localStorage.getItem(`info`));
-  const profilePicData = localStorage.getItem(`profilePicData`);
   if (infoFromLocalStroage.name) {
     name.value = infoFromLocalStroage.name;
-    displayData("a-name", infoFromLocalStroage.name);
   }
   if (infoFromLocalStroage.surname) {
     surname.value = infoFromLocalStroage.surname;
-    displayData("a-surname", infoFromLocalStroage.surname);
   }
   if (infoFromLocalStroage.about) {
     about.value = infoFromLocalStroage.about;
-    displayData("about-me--a", infoFromLocalStroage.about);
   }
   if (infoFromLocalStroage.email) {
     email.value = infoFromLocalStroage.email;
-    displayData("a-email", infoFromLocalStroage.email);
   }
   if (infoFromLocalStroage.phone) {
     phone.value = infoFromLocalStroage.phone;
-    displayData("a-phone", infoFromLocalStroage.phone);
-  }
-  if (profilePicData) {
-    displayImage(null, profilePicData);
   }
 };
 
