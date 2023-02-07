@@ -36,6 +36,25 @@ function validateDescr() {
   return true;
 }
 
+// function displayDataFromLocalStorage() {
+//   let data = {};
+//   for (let i = 0; i < localStorage.length; i++) {
+//     let key = localStorage.key(i);
+//     let value = localStorage.getItem(key);
+//     data[key] = value;
+//   }
+//   if (Object.keys(data).length > 0) {
+//     let html = "";
+//     for (var key in data) {
+//       html += "<p>" + data[key] + "</p>";
+//     }
+//     document.getElementById("displayArea").innerHTML = html;
+//   } else {
+//     console.log("No data found in local storage");
+//   }
+// }
+// displayDataFromLocalStorage();
+
 const redirectToPage = function (selector, route) {
   const addNewRecord = document.querySelector(selector);
   addNewRecord.onclick = function (e) {
@@ -66,3 +85,23 @@ const redirectToPrevPage = function (selector, route) {
 };
 
 redirectToPrevPage(`.prev`, `./info.html`);
+
+// const getAllValuesFromLocalStorage = function () {
+//   let values = {};
+//   for (let i = 0; i < localStorage.length; i++) {
+//     let key = localStorage.key(i);
+//     values[key] = localStorage.getItem(key);
+//     console.log(values);
+//   }
+//   return values;
+// };
+
+// console.log(getAllValuesFromLocalStorage());
+
+// const values = getAllValuesFromLocalStorage();
+// for (let key in values) {
+//   console.log(key + ": " + values[key]);
+// }
+
+// const specificValue = values["key"];
+// console.log(specificValue);

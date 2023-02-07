@@ -83,12 +83,25 @@ const loadFile = function (event) {
 const fillInputValues = function () {
   const name = document.getElementById(`name`);
   const surname = document.getElementById(`surname`);
+  const email = document.getElementById(`email`);
+  const phone = document.getElementById(`phone-number`);
+  const about = document.getElementById(`about-me`);
+
   const infoFromLocalStroage = JSON.parse(localStorage.getItem(`info`));
   if (infoFromLocalStroage.name) {
     name.value = infoFromLocalStroage.name;
   }
   if (infoFromLocalStroage.surname) {
     surname.value = infoFromLocalStroage.surname;
+  }
+  if (infoFromLocalStroage.about) {
+    about.value = infoFromLocalStroage.about;
+  }
+  if (infoFromLocalStroage.email) {
+    email.value = infoFromLocalStroage.email;
+  }
+  if (infoFromLocalStroage.phone) {
+    phone.value = infoFromLocalStroage.phone;
   }
 };
 
@@ -97,6 +110,9 @@ function saveFormToLocalStorage() {
   const data = {
     name: document.getElementById(`name`).value,
     surname: document.getElementById(`surname`).value,
+    about: document.getElementById(`about-me`).value,
+    email: document.getElementById(`email`).value,
+    phone: document.getElementById(`phone-number`).value,
   };
   // localStorage.setItem("name", document.getElementById("name").value);
   localStorage.setItem(`info`, JSON.stringify(data));
