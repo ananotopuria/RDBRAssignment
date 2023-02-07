@@ -5,7 +5,7 @@ const fileError = document.getElementById(`file-error`);
 function validateName() {
   const name = document.getElementById(`name`).value;
   const nameError = document.getElementById(`name-error`);
-  document.getElementById(`a-name`).innerHTML = name;
+  displayData("a-name", name);
   if (name.length < 2 || !/^[ა-ჰ]+$/.test(name)) {
     nameError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
@@ -14,10 +14,14 @@ function validateName() {
   return true;
 }
 
+function displayData(selector, value) {
+  document.getElementById(selector).innerHTML = value;
+}
+
 function validateSurname() {
   const surnameError = document.getElementById(`surname-error`);
   const surname = document.getElementById(`surname`).value;
-  document.getElementById(`a-surname`).innerHTML = surname;
+  displayData("a-surname", surname);
   if (surname.length < 2 || !/^[ა-ჰ]+$/.test(surname)) {
     surnameError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
@@ -29,7 +33,7 @@ function validateSurname() {
 function validateEmail() {
   const emailError = document.getElementById(`email-error`);
   const email = document.getElementById(`email`).value;
-  document.getElementById(`a-email`).innerHTML = email;
+  displayData("a-email", email);
   const emailRegex = /^[a-zA-Z0-9._-]+@redberry.ge$/;
   const displayEmailIcon = document.getElementById(`a-email--icon`);
   if (!emailRegex.test(email)) {
@@ -45,7 +49,7 @@ function validatePhone() {
   const phoneRegex = /^\+995\d{9}$|^\+995\s\d{3}\s\d{3}\s\d{3}$/;
   const phoneError = document.getElementById(`phone-error`);
   const phone = document.getElementById(`phone-number`).value;
-  document.getElementById(`a-phone`).innerHTML = phone;
+  displayData("a-phone", phone);
   const displayPhoneIcon = document.getElementById(`a-phone--icon`);
   if (!phoneRegex.test(phone)) {
     phoneError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
@@ -60,6 +64,7 @@ function textArea() {
   const aboutMeLabel = document.getElementById(`about-label`);
   const aboutMeTextArea = document.getElementById(`about-me`).value;
   document.getElementById(`about-me--a`).innerHTML = aboutMeTextArea;
+  displayData("about-me--a", aboutMeTextArea);
   if (aboutMeTextArea === "") {
     aboutMeLabel.classList.add(`hidden`);
   } else {
@@ -70,15 +75,35 @@ function textArea() {
 const imgBox = document.getElementById(`imgBox`);
 
 const loadFile = function (event) {
+  var reader = new FileReader();
+  reader.readAsDataURL(event.target.files[0]);
+  reader.addEventListener("load", () => {
+    localStorage.setItem("profilePicData", reader.result);
+    var element = document.getElementById("profile-pic");
+    if (element) {
+      element.src = reader.result;
+    } else {
+      displayImage(event);
+    }
+  });
+};
+
+function displayImage(event, localStorageProfilePic) {
   const img = new Image();
-  img.src = URL.createObjectURL(event.target.files[0]);
+  img.id = "profile-pic";
+  if (localStorageProfilePic) {
+    img.src = localStorageProfilePic;
+  } else {
+    img.src = URL.createObjectURL(event.target.files[0]);
+  }
+
   img.style.width = `250px`;
   img.style.height = `auto`;
   img.style.borderRadius = `50%`;
   img.onload = function () {
     document.getElementById(`imgBox`).appendChild(img);
   };
-};
+}
 
 const fillInputValues = function () {
   const name = document.getElementById(`name`);
@@ -88,20 +113,29 @@ const fillInputValues = function () {
   const about = document.getElementById(`about-me`);
 
   const infoFromLocalStroage = JSON.parse(localStorage.getItem(`info`));
+  const profilePicData = localStorage.getItem(`profilePicData`);
   if (infoFromLocalStroage.name) {
     name.value = infoFromLocalStroage.name;
+    displayData("a-name", infoFromLocalStroage.name);
   }
   if (infoFromLocalStroage.surname) {
     surname.value = infoFromLocalStroage.surname;
+    displayData("a-surname", infoFromLocalStroage.surname);
   }
   if (infoFromLocalStroage.about) {
     about.value = infoFromLocalStroage.about;
+    displayData("about-me--a", infoFromLocalStroage.about);
   }
   if (infoFromLocalStroage.email) {
     email.value = infoFromLocalStroage.email;
+    displayData("a-email", infoFromLocalStroage.email);
   }
   if (infoFromLocalStroage.phone) {
     phone.value = infoFromLocalStroage.phone;
+    displayData("a-phone", infoFromLocalStroage.phone);
+  }
+  if (profilePicData) {
+    displayImage(null, profilePicData);
   }
 };
 
@@ -150,3 +184,16 @@ const redirectToNextPage = function (selector, route) {
 };
 
 redirectToNextPage(`.submit-form`, `./exp.html`);
+
+function getBase64Image(img) {
+  var canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+
+  var dataURL = canvas.toDataURL("image/png");
+
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}

@@ -99,9 +99,12 @@ redirectToPrevPage(`.prev`, `./info.html`);
 // console.log(getAllValuesFromLocalStorage());
 
 // const values = getAllValuesFromLocalStorage();
-// for (let key in values) {
+// for (let info in values) {
 //   console.log(key + ": " + values[key]);
 // }
 
 // const specificValue = values["key"];
 // console.log(specificValue);
+
+const data = JSON.parse(localStorage.getItem(`dataKey`));
+const { name, surname, about, email, phone } = data;
