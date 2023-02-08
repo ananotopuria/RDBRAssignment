@@ -39,7 +39,7 @@
           </div>
           <div class="line"></div>
         </section>
-        <form class="cta-form--experience" action="#">
+        <form class="cta-form--experience" action="#" id="experience-form">
           <div class="position posit">
             <label for="position">თანამდებობა</label>
             <input
@@ -47,7 +47,7 @@
               name="position"
               type="text"
               placeholder="დეველოპერი, დიზაინერი, ა.შ."
-              onkeyup="validatePosition()"
+              onkeyup="validatePosition(this)"
             />
             <span id="position-error"></span>
             <p>მინიმუმ 2 სიმბოლო</p>
@@ -59,7 +59,7 @@
               name="company"
               type="text"
               placeholder="დამსაქმებელი"
-              onkeyup="validateCompany()"
+              onkeyup="validateCompany(this)"
             />
             <span id="company-error"></span>
             <p>მინიმუმ 2 სიმბოლო</p>
@@ -89,8 +89,7 @@
             <span id="descr-error"></span>
           </div>
         </form>
-        <div class="line"></div>
-        <button class="exp-btn">მეტი გამოცდილების დამატება</button>
+        <button class="exp-btn" id="addMoreExperience">მეტი გამოცდილების დამატება</button>
         <div class="btns">
           <button class="back prev">უკან</button>
           <button id="next-section" class="next submit-form">შემდეგი</button>
@@ -137,7 +136,6 @@
               <p id="a-en"></p>
             </p>
             <p class="exp-p--a" id="exp-p--a">
-              
             </p>
           </div>
         </div>
