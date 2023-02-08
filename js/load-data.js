@@ -1,6 +1,37 @@
 export function fillInputValues() {
   let infoFromLocalStroage = JSON.parse(localStorage.getItem(`info`));
   const profilePicData = localStorage.getItem(`profilePicData`);
+  if (profilePicData) {
+    displayImage(null, profilePicData);
+  }
+  if (infoFromLocalStroage) {
+    displayInfo(infoFromLocalStroage);
+  }
+  let experienceFromLocalStorage = JSON.parse(localStorage.getItem(`exp`));
+  if (experienceFromLocalStorage) {
+    displayExperience(experienceFromLocalStorage);
+  }
+}
+
+function displayExperience(experienceFromLocalStorage) {
+  if (experienceFromLocalStorage.position) {
+    displayData(`a-position`, experienceFromLocalStorage.position);
+  }
+  if (experienceFromLocalStorage.company) {
+    displayData(`a-company`, experienceFromLocalStorage.company);
+  }
+  if (experienceFromLocalStorage.descr) {
+    displayData(`exp-p--a`, experienceFromLocalStorage.descr);
+  }
+  if (experienceFromLocalStorage.dateStart) {
+    displayData(`a-st`, experienceFromLocalStorage.dateStart);
+  }
+  if (experienceFromLocalStorage.dateEnd) {
+    displayData(`a-en`, experienceFromLocalStorage.dateEnd);
+  }
+}
+
+function displayInfo(infoFromLocalStroage) {
   if (infoFromLocalStroage.name) {
     displayData("a-name", infoFromLocalStroage.name);
   }
@@ -21,19 +52,6 @@ export function fillInputValues() {
     const displayPhoneIcon = document.getElementById(`a-phone--icon`);
     displayPhoneIcon.classList.remove(`hidden`);
     displayData("a-phone", infoFromLocalStroage.phone);
-  }
-  if (profilePicData) {
-    displayImage(null, profilePicData);
-  }
-  infoFromLocalStroage = JSON.parse(localStorage.getItem(`exp`));
-  if (infoFromLocalStroage.position) {
-    displayData(`a-position`, infoFromLocalStroage.position);
-  }
-  if (infoFromLocalStroage.company) {
-    displayData(`a-company`, infoFromLocalStroage.company);
-  }
-  if (infoFromLocalStroage.descr) {
-    displayData(`exp-p--a`, infoFromLocalStroage.descr);
   }
 }
 

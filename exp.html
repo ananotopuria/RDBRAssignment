@@ -66,13 +66,13 @@
           </div>
           <div class="exp-date">
             <div class="st-date">
-              <label for="st" class="posit">დაწყების რიცხვი</label>
-              <input id="st" name="st" type="date" onkeyup="validateDateSt(this)"/>
+              <label for="start-date" class="posit">დაწყების რიცხვი</label>
+              <input id="start-date" name="st" type="date" onChange="validateDateStart(this)" required/>
               <span id="st-error"></span>
             </div>
             <div class="en-date">
-              <label for="en" class="posit">დამთავრების რიცხვი</label>
-              <input id="en" name="en" type="date" onkeyup="validateDateEn()"/>
+              <label for="end-date" class="posit">დამთავრების რიცხვი</label>
+              <input id="end-date" name="en" type="date" onChange="validateDateEnd(this)" required/>
               <span id="en-error"></span>
             </div>
           </div>

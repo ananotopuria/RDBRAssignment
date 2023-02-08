@@ -113,6 +113,9 @@ const fillInputValues = function () {
   const about = document.getElementById(`about-me`);
 
   const infoFromLocalStroage = JSON.parse(localStorage.getItem(`info`));
+  if (!infoFromLocalStroage) {
+    return;
+  }
   if (infoFromLocalStroage.name) {
     name.value = infoFromLocalStroage.name;
   }
@@ -166,11 +169,14 @@ const redirectToPage = function (selector, route) {
 
 redirectToPage(`.btn-back`, `./index.html`);
 
-const redirectToNextPage = function (selector, route) {
+const redirectToNextPage = function (selector, route, event) {
   const addNewRecord = document.querySelector(selector);
   addNewRecord.onclick = function (e) {
     e.preventDefault();
     location.href = route;
+    if (!validateName) {
+      event.preventDefault;
+    }
   };
 };
 

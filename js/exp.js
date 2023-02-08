@@ -28,6 +28,21 @@ function validateCompany() {
   return true;
 }
 
+function validateDateStart(input) {
+  console.log(input.value);
+  let date = new Date();
+}
+
+function validateDateEnd(input) {
+  console.log(input.value);
+}
+
+document.getElementById(`next-section`).addEventListener(`click`, function () {
+  console.log("Redirect to next section");
+  saveFormToLocalStorage();
+  location.href = `exp.html`;
+});
+
 // function validateDateSt(input) {
 //   // const stDateError = document.getElementById(`st-error`);
 //   let dateValue = input.value;
@@ -84,28 +99,14 @@ function validateDescr() {
   return true;
 }
 
-const fillInputValues = function () {
-  const position = document.getElementById(`position`);
-  const company = document.getElementById(`company`);
-  const descr = document.getElementById(`descr`);
-  const infoFromLocalStroage = JSON.parse(localStorage.getItem(`exp`));
-  if (infoFromLocalStroage.position) {
-    position.value = infoFromLocalStroage.position;
-  }
-  if (infoFromLocalStroage.company) {
-    company.value = infoFromLocalStroage.company;
-  }
-  if (infoFromLocalStroage.descr) {
-    descr.value = infoFromLocalStroage.descr;
-  }
-};
-
 function saveFormToLocalStorage() {
   // Save all form items to local storage
   const data = {
     position: document.getElementById(`position`).value,
     company: document.getElementById(`company`).value,
     descr: document.getElementById(`descr`).value,
+    dateStart: document.getElementById(`start-date`).value,
+    dateEnd: document.getElementById(`end-date`).value,
   };
   // localStorage.setItem("name", document.getElementById("name").value);
   localStorage.setItem(`exp`, JSON.stringify(data));
@@ -115,6 +116,33 @@ window.addEventListener(`load`, (event) => {
   console.log(`page is fully loaded`);
   fillInputValues();
 });
+
+const fillInputValues = function () {
+  const position = document.getElementById(`position`);
+  const company = document.getElementById(`company`);
+  const descr = document.getElementById(`descr`);
+  const startDate = document.getElementById(`start-date`);
+  const endDate = document.getElementById(`end-date`);
+  const infoFromLocalStroage = JSON.parse(localStorage.getItem(`exp`));
+  if (!infoFromLocalStroage) {
+    return;
+  }
+  if (infoFromLocalStroage.position) {
+    position.value = infoFromLocalStroage.position;
+  }
+  if (infoFromLocalStroage.company) {
+    company.value = infoFromLocalStroage.company;
+  }
+  if (infoFromLocalStroage.descr) {
+    descr.value = infoFromLocalStroage.descr;
+  }
+  if (infoFromLocalStroage.dateStart) {
+    startDate.value = infoFromLocalStroage.dateStart;
+  }
+  if (infoFromLocalStroage.dateEnd) {
+    endDate.value = infoFromLocalStroage.dateEnd;
+  }
+};
 
 document.getElementById(`next-section`).addEventListener(`click`, function () {
   console.log("Redirect to next section");
