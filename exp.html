@@ -66,12 +66,14 @@
           </div>
           <div class="exp-date">
             <div class="st-date">
-              <label for="st">დაწყების რიცხვი</label>
-              <input id="st" name="st" type="date" />
+              <label for="st" class="posit">დაწყების რიცხვი</label>
+              <input id="st" name="st" type="date" onkeyup="validateDateSt(this)"/>
+              <span id="st-error"></span>
             </div>
             <div class="en-date">
-              <label for="en">დამთავრების რიცხვი</label>
-              <input id="en" name="en" type="date" />
+              <label for="en" class="posit">დამთავრების რიცხვი</label>
+              <input id="en" name="en" type="date" onkeyup="validateDateEn()"/>
+              <span id="en-error"></span>
             </div>
           </div>
           <div class="exp-descr posit">
@@ -122,6 +124,21 @@
               <h2 class="about-label hidden" id="about-label">ჩემ შესახებ</h2>
               <p class="textarea-about" id="about-me--a"></p>
             </div>
+          </div>
+          <div class="line-aside"></div>
+          <div class="section-exp">
+            <h2 class="exp-title title">გამოცდილება</h2>
+            <div class="a-positions">
+              <p id="a-position" class="a-position"></p>
+              <p id="a-company" class="a-company"></p>
+            </div>
+            <p class="exp-dates--a">
+              <p id="a-st"></p>
+              <p id="a-en"></p>
+            </p>
+            <p class="exp-p--a" id="exp-p--a">
+              
+            </p>
           </div>
         </div>
         <img class="l-logo" src="imgs/LOGO-12 1.png" alt="logo" />

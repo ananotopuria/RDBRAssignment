@@ -269,3 +269,56 @@ aside {
 .hidden {
   display: none;
 }
+
+#imgBox {
+  grid-column: 2 / 3;
+  grid-row: 1 / span 4;
+}
+
+.a-icon {
+  color: #898989;
+  width: 1.2rem;
+}
+
+.aside-about {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.line-aside {
+  border-bottom: 1px solid #c8c8c8;
+  margin: 0 5rem;
+}
+/* experience */
+.section-exp {
+  margin: 0 5rem;
+}
+.exp-title {
+  font-size: 1.6rem;
+  color: #f93b1d;
+  font-weight: 700;
+}
+
+.a-positions {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.exp-dates {
+  color: #909090;
+  margin-top: 1rem;
+}
+.exp-p {
+  margin-top: 1rem;
+}
+
+.exp-dates--a {
+  color: #909090;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1;
+}

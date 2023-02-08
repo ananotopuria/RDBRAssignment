@@ -1,10 +1,14 @@
 "use strict";
 
+function displayData(selector, value) {
+  document.getElementById(selector).innerHTML = value;
+}
+
 function validatePosition() {
   const positionError = document.getElementById(`position-error`);
   const position = document.getElementById(`position`).value;
-  //   document.getElementById(`a-name`).innerHTML = name;
-  if (position.length < 2 || !/^[ა-ჰ]+$/.test(position)) {
+  displayData(`a-position`, position);
+  if (position.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(position)) {
     positionError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
   }
@@ -15,8 +19,8 @@ function validatePosition() {
 function validateCompany() {
   const companyError = document.getElementById(`company-error`);
   const company = document.getElementById(`company`).value;
-  //   document.getElementById(`a-name`).innerHTML = name;
-  if (company.length < 2 || !/^[ა-ჰ]+$/.test(company)) {
+  displayData(`a-company`, company);
+  if (company.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(company)) {
     companyError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
   }
@@ -24,36 +28,61 @@ function validateCompany() {
   return true;
 }
 
+// function validateDateSt(input) {
+//   // const stDateError = document.getElementById(`st-error`);
+//   let dateValue = input.value;
+//   if (dateValue) {
+//     let date = new Date(dateValue);
+//     console.log(date);
+//     if (date.toString() !== "Invalid Date") {
+//       // valid date
+//       input.style.backgroundColor = "white";
+//     } else {
+//       // invalid date
+//       input.style.backgroundColor = "red";
+//     }
+//   } else {
+//     // no date entered
+//     input.style.backgroundColor = "red";
+//   }
+// }
+//   const input = document.querySelector("#st");
+
+//   const formattedDate = date.toLocaleDateString("default", {
+//     month: "2-digit",
+//     day: "2-digit",
+//     year: "numeric",
+//   });
+//   console.log("Date:", formattedDate);
+//   // const st = document.getElementById(`st`).value;
+//   displayData(`a-st`, st);
+//   if (st === "" || st === "1970-01-01") {
+//     stDateError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
+//     return false;
+//   }
+//   stDateError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
+//   return true;
+// }
+
+// function validateDateEn() {
+//   const enDateError = document.getElementById(`en-error`);
+//   const en = document.getElementById(`en`).value;
+//   displayData(`a-en`, en);
+// }
+
 function validateDescr() {
   const descrError = document.getElementById(`descr-error`);
   const descr = document.getElementById(`descr`).value;
   //   document.getElementById(`a-name`).innerHTML = name;
-  if (descr.length < 2 || !/^[ა-ჰ]+$/.test(descr)) {
+
+  displayData(`exp-p--a`, descr);
+  if (descr.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(descr)) {
     descrError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
   }
   descrError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
   return true;
 }
-
-// function displayDataFromLocalStorage() {
-//   let data = {};
-//   for (let i = 0; i < localStorage.length; i++) {
-//     let key = localStorage.key(i);
-//     let value = localStorage.getItem(key);
-//     data[key] = value;
-//   }
-//   if (Object.keys(data).length > 0) {
-//     let html = "";
-//     for (var key in data) {
-//       html += "<p>" + data[key] + "</p>";
-//     }
-//     document.getElementById("displayArea").innerHTML = html;
-//   } else {
-//     console.log("No data found in local storage");
-//   }
-// }
-// displayDataFromLocalStorage();
 
 const redirectToPage = function (selector, route) {
   const addNewRecord = document.querySelector(selector);
@@ -85,26 +114,3 @@ const redirectToPrevPage = function (selector, route) {
 };
 
 redirectToPrevPage(`.prev`, `./info.html`);
-
-// const getAllValuesFromLocalStorage = function () {
-//   let values = {};
-//   for (let i = 0; i < localStorage.length; i++) {
-//     let key = localStorage.key(i);
-//     values[key] = localStorage.getItem(key);
-//     console.log(values);
-//   }
-//   return values;
-// };
-
-// console.log(getAllValuesFromLocalStorage());
-
-// const values = getAllValuesFromLocalStorage();
-// for (let info in values) {
-//   console.log(key + ": " + values[key]);
-// }
-
-// const specificValue = values["key"];
-// console.log(specificValue);
-
-const data = JSON.parse(localStorage.getItem(`dataKey`));
-// const { name, surname, about, email, phone } = data;

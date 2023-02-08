@@ -9,11 +9,17 @@ export function fillInputValues() {
   }
   if (infoFromLocalStroage.about) {
     displayData("about-me--a", infoFromLocalStroage.about);
+    const aboutMeLabel = document.getElementById(`about-label`);
+    aboutMeLabel.classList.remove(`hidden`);
   }
   if (infoFromLocalStroage.email) {
+    const displayEmailIcon = document.getElementById(`a-email--icon`);
+    displayEmailIcon.classList.remove(`hidden`);
     displayData("a-email", infoFromLocalStroage.email);
   }
   if (infoFromLocalStroage.phone) {
+    const displayPhoneIcon = document.getElementById(`a-phone--icon`);
+    displayPhoneIcon.classList.remove(`hidden`);
     displayData("a-phone", infoFromLocalStroage.phone);
   }
   if (profilePicData) {
