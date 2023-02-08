@@ -84,6 +84,44 @@ function validateDescr() {
   return true;
 }
 
+const fillInputValues = function () {
+  const position = document.getElementById(`position`);
+  const company = document.getElementById(`company`);
+  const descr = document.getElementById(`descr`);
+  const infoFromLocalStroage = JSON.parse(localStorage.getItem(`exp`));
+  if (infoFromLocalStroage.position) {
+    position.value = infoFromLocalStroage.position;
+  }
+  if (infoFromLocalStroage.company) {
+    company.value = infoFromLocalStroage.company;
+  }
+  if (infoFromLocalStroage.descr) {
+    descr.value = infoFromLocalStroage.descr;
+  }
+};
+
+function saveFormToLocalStorage() {
+  // Save all form items to local storage
+  const data = {
+    position: document.getElementById(`position`).value,
+    company: document.getElementById(`company`).value,
+    descr: document.getElementById(`descr`).value,
+  };
+  // localStorage.setItem("name", document.getElementById("name").value);
+  localStorage.setItem(`exp`, JSON.stringify(data));
+}
+// when page is loaded fill input values from local storage
+window.addEventListener(`load`, (event) => {
+  console.log(`page is fully loaded`);
+  fillInputValues();
+});
+
+document.getElementById(`next-section`).addEventListener(`click`, function () {
+  console.log("Redirect to next section");
+  saveFormToLocalStorage();
+  location.href = `edu.html`;
+});
+
 const redirectToPage = function (selector, route) {
   const addNewRecord = document.querySelector(selector);
   addNewRecord.onclick = function (e) {

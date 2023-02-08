@@ -25,6 +25,9 @@ export function fillInputValues() {
   if (profilePicData) {
     displayImage(null, profilePicData);
   }
+  // if (infoFromLocalStroage.position) {
+  //   displayData(`a-position`, infoFromLocalStroage.position);
+  // }
 }
 
 function displayData(selector, value) {
