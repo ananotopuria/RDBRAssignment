@@ -1,5 +1,5 @@
 export function fillInputValues() {
-  const infoFromLocalStroage = JSON.parse(localStorage.getItem(`info`));
+  let infoFromLocalStroage = JSON.parse(localStorage.getItem(`info`));
   const profilePicData = localStorage.getItem(`profilePicData`);
   if (infoFromLocalStroage.name) {
     displayData("a-name", infoFromLocalStroage.name);
@@ -25,9 +25,16 @@ export function fillInputValues() {
   if (profilePicData) {
     displayImage(null, profilePicData);
   }
-  // if (infoFromLocalStroage.position) {
-  //   displayData(`a-position`, infoFromLocalStroage.position);
-  // }
+  infoFromLocalStroage = JSON.parse(localStorage.getItem(`exp`));
+  if (infoFromLocalStroage.position) {
+    displayData(`a-position`, infoFromLocalStroage.position);
+  }
+  if (infoFromLocalStroage.company) {
+    displayData(`a-company`, infoFromLocalStroage.company);
+  }
+  if (infoFromLocalStroage.descr) {
+    displayData(`exp-p--a`, infoFromLocalStroage.descr);
+  }
 }
 
 function displayData(selector, value) {
