@@ -64,7 +64,7 @@ main {
   font-weight: bold;
   font-size: 3rem;
   line-height: 100%;
-  padding-top: 5rem;
+  /* padding-top: 5rem; */
   vertical-align: text-top;
   display: inline-block;
 }
@@ -311,7 +311,8 @@ aside {
   color: #909090;
   margin-top: 1rem;
 }
-.exp-p {
+.exp-p,
+.exp-p--a {
   margin-top: 1rem;
 }
 
@@ -321,4 +322,14 @@ aside {
   display: flex;
   flex-direction: row;
   gap: 1;
+}
+
+#a-st {
+  color: #909090;
+  display: inline-block;
+}
+
+#a-en {
+  color: #909090;
+  display: inline-block;
 }

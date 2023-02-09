@@ -45,48 +45,6 @@ document.getElementById(`next-section`).addEventListener(`click`, function () {
   location.href = `exp.html`;
 });
 
-// function validateDateSt(input) {
-//   // const stDateError = document.getElementById(`st-error`);
-//   let dateValue = input.value;
-//   if (dateValue) {
-//     let date = new Date(dateValue);
-//     console.log(date);
-//     if (date.toString() !== "Invalid Date") {
-//       // valid date
-//       input.style.backgroundColor = "white";
-//     } else {
-//       // invalid date
-//       input.style.backgroundColor = "red";
-//     }
-//   } else {
-//     // no date entered
-//     input.style.backgroundColor = "red";
-//   }
-// }
-//   const input = document.querySelector("#st");
-
-//   const formattedDate = date.toLocaleDateString("default", {
-//     month: "2-digit",
-//     day: "2-digit",
-//     year: "numeric",
-//   });
-//   console.log("Date:", formattedDate);
-//   // const st = document.getElementById(`st`).value;
-//   displayData(`a-st`, st);
-//   if (st === "" || st === "1970-01-01") {
-//     stDateError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
-//     return false;
-//   }
-//   stDateError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
-//   return true;
-// }
-
-// function validateDateEn() {
-//   const enDateError = document.getElementById(`en-error`);
-//   const en = document.getElementById(`en`).value;
-//   displayData(`a-en`, en);
-// }
-
 function validateDescr() {
   const descrError = document.getElementById(`descr-error`);
   const descr = document.getElementById(`descr`).value;
@@ -182,10 +140,10 @@ const redirectToPrevPage = function (selector, route) {
 };
 
 redirectToPrevPage(`.prev`, `./info.html`);
-var counter = 0;
+// var counter = 0;
 document.getElementById("addMoreExperience").addEventListener("click", () => {
-  counter++;
-  `a-position``position_1`;
+  // counter++;
+  // `a-position``position_1`;
   console.log("add more rows");
   let hr = document.createElement("hr");
   let form = document.getElementById("experience-form");
@@ -260,6 +218,25 @@ document.getElementById("addMoreExperience").addEventListener("click", () => {
   experienceDiv.appendChild(experienceEnd);
 
   form.appendChild(experienceDiv);
+
+  //descr
+
+  let descrDiv = document.createElement("div");
+  descrDiv.setAttribute("class", "exp-descr posit");
+  let descrLabel = document.createElement("label");
+  descrLabel.setAttribute("for", "descr");
+  descrLabel.innerHTML = "აღწერა";
+  let descrInput = document.createElement("textarea");
+  descrInput.setAttribute("id", "descr");
+  descrInput.setAttribute("name", "descr[]");
+  descrInput.setAttribute("rows", "4");
+  descrInput.setAttribute("cols", "107");
+  descrInput.setAttribute("placeholder", "როლი თანამდებობაზე და ზოგადი აღწერა");
+  descrInput.onkeyup = validateDescr(descrInput);
+
+  descrDiv.appendChild(descrLabel);
+  descrDiv.appendChild(descrInput);
+  form.appendChild(descrDiv);
 });
 
 function createLabel(classAttribute, forAttribute, value) {

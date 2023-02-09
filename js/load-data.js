@@ -11,6 +11,16 @@ export function fillInputValues() {
   if (experienceFromLocalStorage) {
     displayExperience(experienceFromLocalStorage);
   }
+  let educationFromLocalStorage = JSON.parse(localStorage.getItem(`edu`));
+  if (educationFromLocalStorage) {
+    displayEducation(educationFromLocalStorage);
+  }
+}
+
+function displayEducation(educationFromLocalStorage) {
+  if (educationFromLocalStorage.school) {
+    displayData(`a-school`, educationFromLocalStorage.school);
+  }
 }
 
 function displayExperience(experienceFromLocalStorage) {
