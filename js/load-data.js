@@ -24,8 +24,8 @@ function displayEducation(educationFromLocalStorage) {
   if (educationFromLocalStorage.descr) {
     displayData(`a-descr`, educationFromLocalStorage.descr);
   }
-  if (experienceFromLocalStorage.dateEnd) {
-    displayData(`a-end`, experienceFromLocalStorage.dateEnd);
+  if (educationFromLocalStorage.dateEnd) {
+    displayData(`a-end`, educationFromLocalStorage.dateEnd);
   }
 }
 
@@ -56,17 +56,17 @@ function displayInfo(infoFromLocalStroage) {
   }
   if (infoFromLocalStroage.about) {
     displayData("about-me--a", infoFromLocalStroage.about);
-    const aboutMeLabel = document.getElementById(`about-label`);
-    aboutMeLabel.classList.remove(`hidden`);
+    // const aboutMeLabel = document.getElementById(`about-label`);
+    // aboutMeLabel.classList.remove(`hidden`);
   }
   if (infoFromLocalStroage.email) {
-    const displayEmailIcon = document.getElementById(`a-email--icon`);
-    displayEmailIcon.classList.remove(`hidden`);
+    // const displayEmailIcon = document.getElementById(`a-email--icon`);
+    // displayEmailIcon.classList.remove(`hidden`);
     displayData("a-email", infoFromLocalStroage.email);
   }
   if (infoFromLocalStroage.phone) {
-    const displayPhoneIcon = document.getElementById(`a-phone--icon`);
-    displayPhoneIcon.classList.remove(`hidden`);
+    // const displayPhoneIcon = document.getElementById(`a-phone--icon`);
+    // displayPhoneIcon.classList.remove(`hidden`);
     displayData("a-phone", infoFromLocalStroage.phone);
   }
 }

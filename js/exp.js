@@ -39,11 +39,11 @@ function validateDateEnd(input) {
   console.log(input.value);
 }
 
-document.getElementById(`next-section`).addEventListener(`click`, function () {
-  console.log("Redirect to next section");
-  saveFormToLocalStorage();
-  location.href = `exp.html`;
-});
+// document.getElementById(`next-section`).addEventListener(`click`, function () {
+//   console.log("Redirect to next section");
+//   saveFormToLocalStorage();
+//   location.href = `exp.html`;
+// });
 
 function validateDescr() {
   const descrError = document.getElementById(`descr-error`);

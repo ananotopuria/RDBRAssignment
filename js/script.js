@@ -3,15 +3,34 @@
 const fileError = document.getElementById(`file-error`);
 
 function validateName() {
-  const name = document.getElementById(`name`).value;
+  let nameObject = getNameAndValidate();
   const nameError = document.getElementById(`name-error`);
-  displayData("a-name", name);
-  if (name.length < 2 || !/^[ა-ჰ]+$/.test(name)) {
-    nameError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
-    return false;
+  displayData("a-name", nameObject.nameElement.value);
+  if (nameObject.valid) {
+    // OK
+    nameObject.nameElement.setAttribute("class", "valid-input");
+    nameError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
+    return;
   }
-  nameError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
+  //Error
+  nameObject.nameElement.setAttribute("class", "invalid-input");
+  nameError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
+
   return true;
+}
+
+function getNameAndValidate() {
+  const name = document.getElementById(`name`);
+  if (name.value.length < 2 || !/^[ა-ჰ]+$/.test(name.value)) {
+    return {
+      valid: false,
+      nameElement: name,
+    };
+  }
+  return {
+    valid: true,
+    nameElement: name,
+  };
 }
 
 function displayData(selector, value) {
@@ -152,11 +171,22 @@ window.addEventListener(`load`, (event) => {
   fillInputValues();
 });
 
-document.getElementById(`next-section`).addEventListener(`click`, function () {
-  console.log("Redirect to next section");
-  saveFormToLocalStorage();
-  location.href = `exp.html`;
-});
+document
+  .getElementById(`next-section-experience`)
+  .addEventListener(`click`, function (event) {
+    // Validate form
+    console.log("click event");
+    event.preventDefault();
+    let name = getNameAndValidate();
+
+    if (name.valid == false) {
+      console.log("name.valid", name.valid);
+      return;
+    }
+    console.log("isValid", name);
+    redirectToRoute("./exp.html");
+    saveFormToLocalStorage();
+  });
 
 const redirectToPage = function (selector, route) {
   const addNewRecord = document.querySelector(selector);
@@ -169,18 +199,17 @@ const redirectToPage = function (selector, route) {
 
 redirectToPage(`.btn-back`, `./index.html`);
 
-const redirectToNextPage = function (selector, route, event) {
-  const addNewRecord = document.querySelector(selector);
-  addNewRecord.onclick = function (e) {
-    e.preventDefault();
-    location.href = route;
-    if (!validateName) {
-      event.preventDefault;
-    }
-  };
+const redirectToRoute = function (route) {
+  location.href = route;
 };
 
-redirectToNextPage(`.submit-form`, `./exp.html`);
+// const redirectToNextPage = function (selector, route, event) {
+//   const addNewRecord = document.querySelector(selector);
+//   addNewRecord.onclick = function (e) {
+//     e.preventDefault();
+//     location.href = route;
+//   };
+// };
 
 function getBase64Image(img) {
   var canvas = document.createElement("canvas");

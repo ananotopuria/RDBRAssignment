@@ -50,6 +50,21 @@ function saveFormToLocalStorage() {
 window.addEventListener(`load`, (event) => {
   console.log(`page is fully loaded`);
   fillInputValues();
+
+  fetch("https://resume.redberryinternship.ge/api/degrees")
+    .then((response) => response.json())
+    .then((data) => {
+      for (var i = 0; i < data.length; i++) {
+        let select = document.getElementById("degree");
+        var option = document.createElement("option");
+        option.value = data[i].id;
+        option.text = data[i].title;
+        select.appendChild(option);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 });
 
 const fillInputValues = function () {

@@ -1,5 +1,9 @@
 "use strict";
 
+function displayData(selector, value) {
+  document.getElementById(selector).innerHTML = value;
+}
+
 //modal woindow
 
 const modal = document.querySelector(`.modal`);
@@ -13,7 +17,3 @@ const closeModal = function () {
 
 btnCloseModal.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
-
-function displayData(selector, value) {
-  document.getElementById(selector).innerHTML = value;
-}
