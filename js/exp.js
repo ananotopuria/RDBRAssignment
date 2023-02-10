@@ -211,7 +211,7 @@ document.getElementById("addMoreExperience").addEventListener("click", () => {
     "",
     validateDateEnd
   );
-  var endDateError = createSpan("st-error");
+  var endDateError = createSpan("en-error");
   experienceEnd.appendChild(endLabel);
   experienceEnd.appendChild(endDateInputElement);
   experienceEnd.appendChild(endDateError);

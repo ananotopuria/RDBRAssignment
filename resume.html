@@ -7,50 +7,47 @@
     <link rel="icon" href="imgs/icon.jpg" type="image/icon" />
     <link rel="stylesheet" href="css/resume.css" />
     <script defer src="./js/resume.js"></script>
+    <script type="module">
+      import { fillInputValues } from "./js/load-data.js";
+      fillInputValues();
+    </script>
     <title>Resume</title>
   </head>
   <body>
     <div class="container">
       <div class="section-info">
-        <h1 class="full-name">ანზორ მუმლაძე</h1>
+        <div class="full-name">
+          <p id="a-name"></p>
+          <p id="a-surname"></p>
+        </div>
         <img class="photo" src="imgs/Rectangle 9.png" alt="photo" />
-        <p class="mail">@ anzorr666@redberry.ge</p>
-        <p class="phone">+995 597 63 45 16</p>
+        <p class="mail" id="a-email"></p>
+        <p class="phone" id="a-phone"></p>
         <h2 class="about">ჩემ შესახებ</h2>
-        <p class="about-me">
-          ძალიან მიყვარს დიზაინის კეთება. დილით ადრე რომ ავდგები გამამხნევებელი
-          ვარჯიშების მაგიერ დიზაინს ვაკეთებ.
-        </p>
+        <p class="about-me" id="about-me--a"></p>
       </div>
       <div class="line"></div>
       <div class="section-exp">
         <h2 class="exp-title title">გამოცდილება</h2>
         <div class="positions">
-          <p class="position">React Native Developer</p>
-          <p class="position">Microsoft</p>
+          <p class="position" id="a-position"></p>
+          <p class="position" id="a-company"></p>
         </div>
-        <p class="exp-dates">2020-09-23 - 2020-09-23</p>
-        <p class="exp-p">
-          Experienced Javascript Native Developer with 5 years in the industry.
-          proficient withreact. Used problem-solving aptitude to encahge
-          application performance by 14%.created data visualisation tools and
-          integrated designs.
-        </p>
+        <div class="exp-dates">
+          <p id="a-st"></p>
+          <p id="a-en"></p>
+        </div>
+        <p class="exp-p" id="exp-p--a"></p>
       </div>
       <div class="line"></div>
       <div class="section-edu">
         <h2 class="title">განათლება</h2>
         <div class="ed">
-          <p class="school">წმ. ანდრიას საპატრიარქოს სასწავლებელი</p>
+          <p class="school" id="a-school"></p>
           <p class="status">სტუდენტი</p>
         </div>
-        <p class="edu-dates">2020-09-23</p>
-        <p class="edu-p">
-          ვსწავლობდი გულმოდგინეთ. მყავდა ფრიადები. რაც შემეძლო — ვქენი.
-          კომპიუტერები მიყვარდა. ვიჯექი ჩემთვის, ვაკაკუნებდი ამ კლავიშებზე.
-          მეუნებოდნენ — დაჯექი, წაიკითხე რამე, რას აკაკუნებ, დრო მოვა და
-          ჩაგიკაკუნებსო. აჰა, მოვიდა დრო და ვერა ვარ დეველოპერი?
-        </p>
+        <p class="edu-dates" id="a-end"></p>
+        <p class="edu-p" id="a-descr"></p>
       </div>
       <img class="l-logo" src="imgs/LOGO-12 1.png" alt="logo" />
     </div>

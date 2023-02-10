@@ -39,7 +39,7 @@
           </div>
           <div class="line"></div>
         </section>
-        <form class="cta-form--education" action="#">
+        <form class="cta-form--education" action="#" id="education-form">
           <div class="school posit">
             <label for="school">სასწავლებელი</label>
             <input
@@ -63,7 +63,7 @@
             </div>
             <div class="end-date">
               <label for="end">დამთავრების რიცხვი</label>
-              <input id="end" name="end" type="date" />
+              <input id="end-date" name="end" type="date" onChange="validateDateEnd(this)" required/>
             </div>
           </div>
           <div class="edu-descr posit">
@@ -80,7 +80,7 @@
           </div>
         </form>
         <div class="line"></div>
-        <button class="edu-btn">სხვა სასწავლებლის დამატება</button>
+        <button class="edu-btn" id="addMoreEducation">სხვა სასწავლებლის დამატება</button>
         <div class="btns">
           <button class="back prev">უკან</button>
           <button class="next" id="next-section">დასრულება</button>
@@ -130,24 +130,18 @@
             </p>
           </div>
           <div class="line-aside"></div>
-      <div class="section-edu">
-        <h2 class="a-title">განათლება</h2>
-        <div class="ed">
-          <p class="a-school"></p>
-          <p class="a-status">სტუდენტი</p>
+          <div class="section-edu">
+            <h2 class="a-title">განათლება</h2>
+            <div class="ed">
+              <p class="a-school" id="a-school"></p>
+              <p class="a-status">სტუდენტი</p>
+            </div>
+            <p class="edu-dates" id="a-en"></p>
+            <p class="edu-p" id="a-descr">
+            </p>
+          </div>
+          <img class="l-logo" src="imgs/LOGO-12 1.png" alt="logo" />
         </div>
-        <p class="edu-dates">2020-09-23</p>
-        <p class="edu-p">
-          ვსწავლობდი გულმოდგინეთ. მყავდა ფრიადები. რაც შემეძლო — ვქენი.
-          კომპიუტერები მიყვარდა. ვიჯექი ჩემთვის, ვაკაკუნებდი ამ კლავიშებზე.
-          მეუნებოდნენ — დაჯექი, წაიკითხე რამე, რას აკაკუნებ, დრო მოვა და
-          ჩაგიკაკუნებსო. აჰა, მოვიდა დრო და ვერა ვარ დეველოპერი?
-        </p>
-      </div>
-      <img class="l-logo" src="imgs/LOGO-12 1.png" alt="logo" />
-    </div>
-        </div>
-        <img class="l-logo" src="imgs/LOGO-12 1.png" alt="logo" />
       </aside>
     </div>
     <script

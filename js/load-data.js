@@ -21,6 +21,12 @@ function displayEducation(educationFromLocalStorage) {
   if (educationFromLocalStorage.school) {
     displayData(`a-school`, educationFromLocalStorage.school);
   }
+  if (educationFromLocalStorage.descr) {
+    displayData(`a-descr`, educationFromLocalStorage.descr);
+  }
+  if (experienceFromLocalStorage.dateEnd) {
+    displayData(`a-end`, experienceFromLocalStorage.dateEnd);
+  }
 }
 
 function displayExperience(experienceFromLocalStorage) {
