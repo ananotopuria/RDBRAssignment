@@ -30,17 +30,31 @@ function displayEducation(educationFromLocalStorage) {
 }
 
 function displayExperience(experienceFromLocalStorage) {
-  if (experienceFromLocalStorage.company) {
-    displayData(`a-company`, experienceFromLocalStorage.company);
-  }
+  //   if (experienceFromLocalStorage.position && experienceFromLocalStorage.position.length > 0) {
+  //     displayValues(experienceFromLocalStorage.position, 'a-position');
+  //   }
+  // if (experienceFromLocalStorage.company && experienceFromLocalStorage.company.length > 0) {
+  //   displayValues(experienceFromLocalStorage.company, 'a-company');
+  // }
   if (experienceFromLocalStorage.descr) {
     displayData(`exp-p--a`, experienceFromLocalStorage.descr);
   }
-  if (experienceFromLocalStorage.dateStart) {
-    displayData(`a-st`, experienceFromLocalStorage.dateStart);
-  }
-  if (experienceFromLocalStorage.dateEnd) {
-    displayData(`a-en`, experienceFromLocalStorage.dateEnd);
+
+  // if (experienceFromLocalStorage.dateStart && experienceFromLocalStorage.dateStart.length > 0) {
+  //   displayValues(experienceFromLocalStorage.dateStart, 'a-st');
+  // }
+  //       if (experienceFromLocalStorage.dateEnd && experienceFromLocalStorage.dateEnd.length > 0) {
+  //         displayValues(experienceFromLocalStorage.dateEnd, 'a-en');
+  //       }
+}
+
+function displayValues(array, displaySelector) {
+  for (let index = 0; index < array.length; index++) {
+    if (index == 0) {
+      displayData(displaySelector, array[index]);
+    } else {
+      displayData(displaySelector + "_" + index, array[index]);
+    }
   }
 }
 

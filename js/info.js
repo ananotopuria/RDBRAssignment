@@ -252,7 +252,7 @@ const fillInputValues = function () {
   const name = document.getElementById(`name`);
   const surname = document.getElementById(`surname`);
   const email = document.getElementById(`email`);
-  const phone = document.getElementById(`phone-number`);
+  const phone = document.getElementById(`phone`);
   const about = document.getElementById(`about-me`);
 
   const infoFromLocalStroage = JSON.parse(localStorage.getItem(`info`));
@@ -272,6 +272,7 @@ const fillInputValues = function () {
     email.value = infoFromLocalStroage.email;
   }
   if (infoFromLocalStroage.phone) {
+    console.log(infoFromLocalStroage.phone);
     phone.value = infoFromLocalStroage.phone;
   }
 };

@@ -4,14 +4,18 @@ function displayData(selector, value) {
   document.getElementById(selector).innerHTML = value;
 }
 
+function getIndexFromElementId(element) {
+  let index = element.id.split("_")[1];
+  return index;
+}
+
 function validatePosition(positionElement, isFirst) {
   const positionError = positionElement.nextElementSibling;
   const position = positionElement.value;
   if (isFirst) {
     displayData(`a-position`, position);
   } else {
-    let index = positionElement.id.split("_")[1];
-    console.log(index);
+    let index = getIndexFromElementId(positionElement);
     displayData(`a-position_` + index, position);
   }
   if (position.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(position)) {
@@ -22,11 +26,15 @@ function validatePosition(positionElement, isFirst) {
   return true;
 }
 
-function validateCompany(companyElement) {
-  const companyError = document.getElementById(`company-error`);
-  // const company = document.getElementById(`company`).value;
+function validateCompany(companyElement, isFirst) {
+  const companyError = companyElement.nextElementSibling;
   const company = companyElement.value;
-  displayData(`a-company`, company);
+  if (isFirst) {
+    displayData(`a-company`, company);
+  } else {
+    let index = getIndexFromElementId(companyElement);
+    displayData(`a-company_` + index, company);
+  }
   if (company.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(company)) {
     companyError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
@@ -35,31 +43,45 @@ function validateCompany(companyElement) {
   return true;
 }
 
-function validateDateStart(input) {
-  console.log(input.value);
+function validateDateStart(input, isFirst) {
+  if (isFirst) {
+    displayData("a-st", input.value);
+    return;
+  }
+  let index = getIndexFromElementId(input);
   //Validate - Todo
-  displayData("a-st", input.value);
+  var elem = document.getElementById("a-st_" + index);
+  if (elem) {
+    displayData("a-st_" + index, input.value);
+  }
 }
 
-function validateDateEnd(input) {
-  console.log(input.value);
+function validateDateEnd(input, isFirst) {
+  if (isFirst) {
+    displayData("a-en", input.value);
+    return;
+  }
+  let index = getIndexFromElementId(input);
   //Validate - Todo
-  displayData("a-en", input.value);
+  var elem = document.getElementById("a-en_" + index);
+  if (elem) {
+    displayData("a-en_" + index, input.value);
+  }
 }
 
-// document.getElementById(`next-section`).addEventListener(`click`, function () {
-//   console.log("Redirect to next section");
-//   saveFormToLocalStorage();
-//   location.href = `exp.html`;
-// });
+function validateDescr(descriptionEelement, isFirst) {
+  const descrError = descriptionEelement.nextElementSibling;
 
-function validateDescr() {
-  const descrError = document.getElementById(`descr-error`);
-  const descr = document.getElementById(`descr`).value;
-  //   document.getElementById(`a-name`).innerHTML = name;
-
-  displayData(`exp-p--a`, descr);
-  if (descr.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(descr)) {
+  if (isFirst) {
+    displayData(`exp-p--a`, descriptionEelement.value);
+  } else {
+    let index = getIndexFromElementId(descriptionEelement);
+    displayData(`exp-p--a_` + index, descriptionEelement.value);
+  }
+  if (
+    descriptionEelement.length < 2 ||
+    !/^[ა-ჰa-zA-Z\s]+$/.test(descriptionEelement)
+  ) {
     descrError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
   }
@@ -79,22 +101,41 @@ function saveFormToLocalStorage() {
 
   // position
   const position = document.querySelectorAll('input[name="position"]');
-  const positionValues = [];
+  data.position = getValuesFromInput(position);
 
-  position.forEach(function (input) {
-    positionValues.push(input.value);
-  });
-  console.log(positionValues);
-  data.position = positionValues;
-  // localStorage.setItem("name", document.getElementById("name").value);
+  // company
+  const company = document.querySelectorAll('input[name="company"]');
+  data.company = getValuesFromInput(company);
+
+  const dateStart = document.querySelectorAll('input[name="st"]');
+  const dateEnd = document.querySelectorAll('input[name="en"]');
+  data.dateStart = getValuesFromInput(dateStart);
+  data.dateEnd = getValuesFromInput(dateEnd);
+
+  const description = document.querySelectorAll('textarea[name="descr"]');
+  console.log(description);
+  data.descr = getValuesFromInput(description);
+
   localStorage.setItem(`exp`, JSON.stringify(data));
 }
+
+function getValuesFromInput(element) {
+  let values = [];
+  element.forEach(function (input) {
+    values.push(input.value);
+  });
+  return values;
+}
+
 // when page is loaded fill input values from local storage
 window.addEventListener(`load`, (event) => {
   console.log(`page is fully loaded`);
   // fillInputValues();
   // calculate how many items in local strage
   let experienceData = JSON.parse(localStorage.getItem(`exp`));
+  if (!experienceData) {
+    return;
+  }
   let countEntries = experienceData.position.length;
   if (countEntries < 1) {
     return;
@@ -121,39 +162,74 @@ const fillInputValues = function () {
   if (infoFromLocalStroage.position) {
     // Display data
     if (infoFromLocalStroage.position.length > 0) {
-      for (
-        let index = 0;
-        index < infoFromLocalStroage.position.length;
-        index++
-      ) {
-        if (index == 0) {
-          position.value = infoFromLocalStroage.position[index];
-          displayData(`a-position`, infoFromLocalStroage.position[index]);
-        } else {
-          var elem = document.getElementById("position_" + index);
-          elem.value = infoFromLocalStroage.position[index];
-          displayData(
-            `a-position_` + index,
-            infoFromLocalStroage.position[index]
-          );
-        }
-      }
+      DisplayAndFillValues(
+        infoFromLocalStroage.position,
+        "position",
+        "a-position",
+        position
+      );
     }
     // Fill input values
   }
   if (infoFromLocalStroage.company) {
-    company.value = infoFromLocalStroage.company;
+    if (infoFromLocalStroage.company.length > 0) {
+      DisplayAndFillValues(
+        infoFromLocalStroage.company,
+        "company",
+        "a-company",
+        company
+      );
+    }
   }
   if (infoFromLocalStroage.descr) {
-    descr.value = infoFromLocalStroage.descr;
+    if (infoFromLocalStroage.descr.length > 0) {
+      DisplayAndFillValues(
+        infoFromLocalStroage.descr,
+        "descr",
+        "exp-p--a",
+        descr
+      );
+    }
   }
   if (infoFromLocalStroage.dateStart) {
-    startDate.value = infoFromLocalStroage.dateStart;
+    if (infoFromLocalStroage.dateStart.length > 0) {
+      DisplayAndFillValues(
+        infoFromLocalStroage.dateStart,
+        "start-date",
+        "a-st",
+        startDate
+      );
+    }
   }
   if (infoFromLocalStroage.dateEnd) {
-    endDate.value = infoFromLocalStroage.dateEnd;
+    if (infoFromLocalStroage.dateEnd.length > 0) {
+      DisplayAndFillValues(
+        infoFromLocalStroage.dateEnd,
+        "end-date",
+        "a-en",
+        endDate
+      );
+    }
   }
 };
+
+function DisplayAndFillValues(
+  array,
+  inputSelector,
+  displaySelector,
+  firstElement
+) {
+  for (let index = 0; index < array.length; index++) {
+    if (index == 0) {
+      firstElement.value = array[index];
+      displayData(displaySelector, array[index]);
+    } else {
+      var elem = document.getElementById(inputSelector + "_" + index);
+      elem.value = array[index];
+      displayData(displaySelector + "_" + index, array[index]);
+    }
+  }
+}
 
 document
   .getElementById(`next-section-education`)
@@ -219,27 +295,31 @@ document.getElementById("addMoreExperience").addEventListener("click", () => {
   positionDiv.appendChild(positionLabel);
   positionDiv.appendChild(positionInput);
   positionDiv.appendChild(errorSpan);
-  form.appendChild(positionDiv);
 
   // Position end -----------------
-
-  //Company
+  // Company-----------------
   let companyDiv = document.createElement("div");
   companyDiv.setAttribute("class", "company posit");
   let companyLabel = document.createElement("label");
   companyLabel.setAttribute("for", "company");
   companyLabel.innerHTML = "დამსაქმებელი";
-  let companyInput = document.createElement("input");
-  companyInput.setAttribute("id", "company");
-  companyInput.setAttribute("name", "company[]");
-  companyInput.setAttribute("type", "text");
-  companyInput.setAttribute("placeholder", "დამსაქმებელი");
-  companyInput.onkeyup = validateCompany(companyInput);
-
+  let companyInput = createInput(
+    "company_" + counter,
+    "company",
+    "text",
+    "დამსაქმებელი",
+    validateCompany,
+    true
+  );
+  companyInput.onkeyup = function () {
+    return validateCompany(companyInput);
+  };
+  errorSpan = createSpan("position-error_" + counter);
   companyDiv.appendChild(companyLabel);
   companyDiv.appendChild(companyInput);
-  form.appendChild(companyDiv);
+  companyDiv.appendChild(errorSpan);
 
+  // Company end -----------------
   //Date
   let experienceDiv = document.createElement("div");
   experienceDiv.setAttribute("class", "exp-date");
@@ -247,14 +327,16 @@ document.getElementById("addMoreExperience").addEventListener("click", () => {
   experienceStart.setAttribute("class", "st-date");
   let startLabel = createLabel("start-date", "posit", "დაწყების რიცხვი");
   let startDateInputElement = createInput(
-    "start-date",
-    "st[]",
+    "start-date_" + counter,
+    "st",
     "date",
     "",
     validateDateStart
   );
+  startDateInputElement.onchange = function () {
+    return validateDateStart(startDateInputElement);
+  };
   var startDateError = createSpan("st-error");
-
   experienceStart.appendChild(startLabel);
   experienceStart.appendChild(startDateInputElement);
   experienceStart.appendChild(startDateError);
@@ -263,40 +345,42 @@ document.getElementById("addMoreExperience").addEventListener("click", () => {
   experienceEnd.setAttribute("class", "en-date");
   let endLabel = createLabel("end-date", "posit", "დამთავრების რიცხვი");
   let endDateInputElement = createInput(
-    "end-date",
-    "en[]",
+    "end-date_" + counter,
+    "en",
     "date",
     "",
     validateDateEnd
   );
+  endDateInputElement.onchange = function () {
+    return validateDateEnd(endDateInputElement);
+  };
   var endDateError = createSpan("en-error");
   experienceEnd.appendChild(endLabel);
   experienceEnd.appendChild(endDateInputElement);
   experienceEnd.appendChild(endDateError);
   experienceDiv.appendChild(experienceEnd);
 
-  form.appendChild(experienceDiv);
-
   //descr
-
   let descrDiv = document.createElement("div");
   descrDiv.setAttribute("class", "exp-descr posit");
   let descrLabel = document.createElement("label");
   descrLabel.setAttribute("for", "descr");
   descrLabel.innerHTML = "აღწერა";
   let descrInput = document.createElement("textarea");
-  descrInput.setAttribute("id", "descr");
-  descrInput.setAttribute("name", "descr[]");
+  descrInput.setAttribute("id", "descr_" + counter);
+  descrInput.setAttribute("name", "descr");
   descrInput.setAttribute("rows", "4");
   descrInput.setAttribute("cols", "107");
   descrInput.setAttribute("placeholder", "როლი თანამდებობაზე და ზოგადი აღწერა");
-  descrInput.onkeyup = validateDescr(descrInput);
-
+  descrInput.onkeyup = function () {
+    return validateDescr(descrInput);
+  };
+  var descError = createSpan("desc-error");
   descrDiv.appendChild(descrLabel);
   descrDiv.appendChild(descrInput);
-  form.appendChild(descrDiv);
+  descrDiv.appendChild(descError);
 
-  // Display Section
+  // Display Section ----------------
   let experienceSection = document.getElementById("section-exp-id");
   let displayHr = document.createElement("hr");
   experienceSection.appendChild(displayHr);
@@ -308,20 +392,25 @@ document.getElementById("addMoreExperience").addEventListener("click", () => {
   displayPositionDiv.appendChild(displayCompany);
   experienceSection.appendChild(displayPositionDiv);
 
-  // Create display divs
-  /*
+  let experienceDates = document.createElement("div");
+  experienceDates.setAttribute("id", "dates");
+  experienceDates.setAttribute("class", "exp-dates-aa");
+  let startDate = createP("a-st_" + counter, "start-date-p");
+  let endDate = createP("a-en_" + counter, "end-date-p");
+  experienceDates.appendChild(startDate);
+  experienceDates.appendChild(endDate);
+  experienceSection.appendChild(experienceDates);
 
-            <div class="a-positions">
-              <p id="a-position" class="a-position"></p>
-              <p id="a-company" class="a-company"></p>
-            </div>
-            <p class="exp-dates--a" id="dates">
-              <p id="a-st"></p>
-              <p id="a-en"></p>
-            </p>
-            <p class="exp-p--a" id="exp-p--a">
-            </p>
-    */
+  let descriptionDiv = document.createElement("div");
+  descriptionDiv.setAttribute("class", "exp-p--a");
+  descriptionDiv.setAttribute("id", "exp-p--a_" + counter);
+
+  experienceSection.appendChild(descriptionDiv);
+
+  form.appendChild(positionDiv);
+  form.appendChild(companyDiv);
+  form.appendChild(experienceDiv);
+  form.appendChild(descrDiv);
   counter++;
 });
 

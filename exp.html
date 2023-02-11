@@ -59,7 +59,7 @@
               name="company"
               type="text"
               placeholder="დამსაქმებელი"
-              onkeyup="validateCompany(this)"
+              onkeyup="validateCompany(this, true)"
             />
             <span id="company-error"></span>
             <p>მინიმუმ 2 სიმბოლო</p>
@@ -67,12 +67,12 @@
           <div class="exp-date">
             <div class="st-date">
               <label for="start-date" class="posit">დაწყების რიცხვი</label>
-              <input id="start-date" name="st" type="date" onChange="validateDateStart(this)" required/>
+              <input id="start-date" name="st" type="date" onChange="validateDateStart(this, true)" required/>
               <span id="st-error"></span>
             </div>
             <div class="en-date">
               <label for="end-date" class="posit">დამთავრების რიცხვი</label>
-              <input id="end-date" name="en" type="date" onChange="validateDateEnd(this)" required/>
+              <input id="end-date" name="en" type="date" onChange="validateDateEnd(this, true)" required/>
               <span id="en-error"></span>
             </div>
           </div>
@@ -84,7 +84,7 @@
               rows="4"
               cols="107"
               placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
-              onkeyup="validateDescr()"
+              onkeyup="validateDescr(this, true)"
             ></textarea>
             <span id="descr-error"></span>
           </div>
@@ -131,10 +131,10 @@
               <p id="a-position" class="a-position"></p>
               <p id="a-company" class="a-company"></p>
             </div>
-            <p class="exp-dates--a" id="dates">
+            <div class="exp-dates--a" id="dates">
               <p id="a-st"></p>
               <p id="a-en"></p>
-            </p>
+            </div>
             <p class="exp-p--a" id="exp-p--a">
             </p>
           </div>
