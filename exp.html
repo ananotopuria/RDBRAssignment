@@ -47,7 +47,7 @@
               name="position"
               type="text"
               placeholder="დეველოპერი, დიზაინერი, ა.შ."
-              onkeyup="validatePosition(this)"
+              onkeyup="validatePosition(this, true)"
             />
             <span id="position-error"></span>
             <p>მინიმუმ 2 სიმბოლო</p>
@@ -92,7 +92,7 @@
         <button class="exp-btn" id="addMoreExperience">მეტი გამოცდილების დამატება</button>
         <div class="btns">
           <button class="back prev">უკან</button>
-          <button id="next-section" class="next submit-form">შემდეგი</button>
+          <button id="next-section-education" class="next submit-form">შემდეგი</button>
         </div>
       </main>
       <aside class="right container-aside">
@@ -125,7 +125,7 @@
             </div>
           </div>
           <div class="line-aside"></div>
-          <div class="section-exp">
+          <div class="section-exp" id="section-exp-id">
             <h2 class="exp-title title">გამოცდილება</h2>
             <div class="a-positions">
               <p id="a-position" class="a-position"></p>

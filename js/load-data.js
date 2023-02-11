@@ -30,9 +30,6 @@ function displayEducation(educationFromLocalStorage) {
 }
 
 function displayExperience(experienceFromLocalStorage) {
-  if (experienceFromLocalStorage.position) {
-    displayData(`a-position`, experienceFromLocalStorage.position);
-  }
   if (experienceFromLocalStorage.company) {
     displayData(`a-company`, experienceFromLocalStorage.company);
   }

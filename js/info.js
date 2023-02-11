@@ -68,18 +68,6 @@ function displayData(selector, value) {
   document.getElementById(selector).innerHTML = value;
 }
 
-// function validateSurname() {
-//   const surnameError = document.getElementById(`surname-error`);
-//   const surname = document.getElementById(`surname`).value;
-//   displayData("a-surname", surname);
-//   if (surname.length < 2 || !/^[ა-ჰ]+$/.test(surname)) {
-//     surnameError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
-//     return false;
-//   }
-//   surnameError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
-//   return true;
-// }
-
 // function validateEmail() {
 //   const emailError = document.getElementById(`email-error`);
 //   const email = document.getElementById(`email`).value;
@@ -143,65 +131,24 @@ function getEmailAndValidate() {
 //   return true;
 // }
 
-// function validatePhone() {
-//   let phoneObject = getPhoneAndValidate();
-//   const phoneError = document.getElementById(`phoneError`);
-//   if (phoneObject.valid) {
-//     // OK
-//     phoneObject.phoneElement.setAttribute("class", "valid-input");
-//     phoneError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
-//     return;
-//   }
-//   //Error
-//   phoneObject.phoneElement.setAttribute("class", "invalid-input");
-//   phoneError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
-//   return true;
-// }
-
-// function getPhoneAndValidate() {
-//   const phone = document.getElementById(`phone`).value;
-//   const phoneRegex = /^\+995\d{9}$|^\+995\s\d{3}\s\d{3}\s\d{3}$/;
-//   if (!phoneRegex.test(phone)) {
-//     return {
-//       valid: false,
-//       phoneElement: phone,
-//     };
-//   }
-//   return {
-//     valid: true,
-//     phoneElement: phone,
-//   };
-// }
-
 function validatePhone() {
   let phoneObject = getPhoneAndValidate();
   const phoneError = document.getElementById(`phone-error`);
-  displayData("a-phone", phoneObject.phoneElement.value);
   const displayPhoneIcon = document.getElementById(`a-phone--icon`);
-  if (!phoneObject.phoneElement) {
-    // Error: element not found
-    return true;
-  }
   if (phoneObject.valid) {
     // OK
     phoneObject.phoneElement.setAttribute("class", "valid-input");
-    phoneError.innerHTML = `<ion-icon class="icon-check" phone="checkmark-circle"></ion-icon>`;
+    phoneError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
     return;
   }
-  // Error: invalid phone number
+  //Error
   phoneObject.phoneElement.setAttribute("class", "invalid-input");
-  phoneError.innerHTML = `<ion-icon class="icon-warning" phone="warning"></ion-icon>`;
-
+  phoneError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
   return true;
 }
+
 function getPhoneAndValidate() {
   const phone = document.getElementById(`phone`);
-  if (!phone) {
-    return {
-      valid: false,
-      phoneElement: null,
-    };
-  }
   const phoneRegex = /^\+995\d{9}$|^\+995\s\d{3}\s\d{3}\s\d{3}$/;
   if (!phoneRegex.test(phone.value)) {
     return {
@@ -214,6 +161,47 @@ function getPhoneAndValidate() {
     phoneElement: phone,
   };
 }
+
+// function validatePhone() {
+//   let phoneObject = getPhoneAndValidate();
+//   const phoneError = document.getElementById(`phone-error`);
+//   displayData("a-phone", phoneObject.phoneElement.value);
+//   if (!phoneObject.phoneElement) {
+//     // Error: element not found
+//     return true;
+//   }
+//   if (phoneObject.valid) {
+//     // OK
+//     phoneObject.phoneElement.setAttribute("class", "valid-input");
+//     phoneError.innerHTML = `<ion-icon class="icon-check" phone="checkmark-circle"></ion-icon>`;
+//     return;
+//   }
+//   // Error: invalid phone number
+//   phoneObject.phoneElement.setAttribute("class", "invalid-input");
+//   phoneError.innerHTML = `<ion-icon class="icon-warning" phone="warning"></ion-icon>`;
+
+//   return true;
+// }
+// function getPhoneAndValidate() {
+//   const phone = document.getElementById(`phone`);
+//   if (!phone) {
+//     return {
+//       valid: false,
+//       phoneElement: null,
+//     };
+//   }
+//   const phoneRegex = /^\+995\d{9}$|^\+995\s\d{3}\s\d{3}\s\d{3}$/;
+//   if (!phoneRegex.test(phone.value)) {
+//     return {
+//       valid: false,
+//       phoneElement: phone,
+//     };
+//   }
+//   return {
+//     valid: true,
+//     phoneElement: phone,
+//   };
+// }
 
 function textArea() {
   const aboutMeLabel = document.getElementById(`about-label`);
@@ -341,14 +329,6 @@ redirectToPage(`.btn-back`, `./index.html`);
 const redirectToRoute = function (route) {
   location.href = route;
 };
-
-// const redirectToNextPage = function (selector, route, event) {
-//   const addNewRecord = document.querySelector(selector);
-//   addNewRecord.onclick = function (e) {
-//     e.preventDefault();
-//     location.href = route;
-//   };
-// };
 
 function getBase64Image(img) {
   var canvas = document.createElement("canvas");

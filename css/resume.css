@@ -156,3 +156,9 @@ body {
   backdrop-filter: blur(3px);
   z-index: 5;
 }
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
