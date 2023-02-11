@@ -199,12 +199,11 @@ span {
 .posit {
   position: relative;
 }
-
 .icon-warning {
-  color: #ff0000;
+  color: #f02424;
 }
 .icon-check {
-  color: #0ea300;
+  color: #98e37e;
 }
 
 /* aside part */

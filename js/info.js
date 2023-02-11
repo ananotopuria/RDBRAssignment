@@ -117,20 +117,6 @@ function getEmailAndValidate() {
   };
 }
 
-// function validatePhone() {
-//   const phoneRegex = /^\+995\d{9}$|^\+995\s\d{3}\s\d{3}\s\d{3}$/;
-//   const phoneError = document.getElementById(`phone-error`);
-//   displayData("a-phone", phone);
-//   const displayPhoneIcon = document.getElementById(`a-phone--icon`);
-//   if (!phoneRegex.test(phone)) {
-//     phoneError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
-//     return false;
-//   }
-//   displayPhoneIcon.classList.remove(`hidden`);
-//   phoneError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
-//   return true;
-// }
-
 function validatePhone() {
   let phoneObject = getPhoneAndValidate();
   const phoneError = document.getElementById(`phone-error`);
@@ -161,47 +147,6 @@ function getPhoneAndValidate() {
     phoneElement: phone,
   };
 }
-
-// function validatePhone() {
-//   let phoneObject = getPhoneAndValidate();
-//   const phoneError = document.getElementById(`phone-error`);
-//   displayData("a-phone", phoneObject.phoneElement.value);
-//   if (!phoneObject.phoneElement) {
-//     // Error: element not found
-//     return true;
-//   }
-//   if (phoneObject.valid) {
-//     // OK
-//     phoneObject.phoneElement.setAttribute("class", "valid-input");
-//     phoneError.innerHTML = `<ion-icon class="icon-check" phone="checkmark-circle"></ion-icon>`;
-//     return;
-//   }
-//   // Error: invalid phone number
-//   phoneObject.phoneElement.setAttribute("class", "invalid-input");
-//   phoneError.innerHTML = `<ion-icon class="icon-warning" phone="warning"></ion-icon>`;
-
-//   return true;
-// }
-// function getPhoneAndValidate() {
-//   const phone = document.getElementById(`phone`);
-//   if (!phone) {
-//     return {
-//       valid: false,
-//       phoneElement: null,
-//     };
-//   }
-//   const phoneRegex = /^\+995\d{9}$|^\+995\s\d{3}\s\d{3}\s\d{3}$/;
-//   if (!phoneRegex.test(phone.value)) {
-//     return {
-//       valid: false,
-//       phoneElement: phone,
-//     };
-//   }
-//   return {
-//     valid: true,
-//     phoneElement: phone,
-//   };
-// }
 
 function textArea() {
   const aboutMeLabel = document.getElementById(`about-label`);
@@ -308,7 +253,7 @@ document
     let phone = getPhoneAndValidate();
 
     if (name.valid && surname.valid && email.valid && phone.valid == false) {
-      console.log("name.valid", name.valid);
+      console.log("name.valid", phone.valid);
       return;
     }
     console.log("isValid", name && surname);

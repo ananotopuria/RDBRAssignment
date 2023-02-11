@@ -19,9 +19,11 @@ function validatePosition(positionElement, isFirst) {
     displayData(`a-position_` + index, position);
   }
   if (position.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(position)) {
+    positionElement.setAttribute("class", "invalid-input");
     positionError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
   }
+  positionElement.setAttribute("class", "valid-input");
   positionError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
   return true;
 }
@@ -36,9 +38,11 @@ function validateCompany(companyElement, isFirst) {
     displayData(`a-company_` + index, company);
   }
   if (company.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(company)) {
+    companyElement.setAttribute("class", "invalid-input");
     companyError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
   }
+  companyElement.setAttribute("class", "valid-input");
   companyError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
   return true;
 }
@@ -80,7 +84,7 @@ function validateDescr(descriptionEelement, isFirst) {
   }
   if (
     descriptionEelement.length < 2 ||
-    !/^[ა-ჰa-zA-Z\s]+$/.test(descriptionEelement)
+    !/^[ა-ჰa-zA-Z\s]+$/.test(descriptionEelement.value)
   ) {
     descrError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
@@ -113,7 +117,6 @@ function saveFormToLocalStorage() {
   data.dateEnd = getValuesFromInput(dateEnd);
 
   const description = document.querySelectorAll('textarea[name="descr"]');
-  console.log(description);
   data.descr = getValuesFromInput(description);
 
   localStorage.setItem(`exp`, JSON.stringify(data));
@@ -231,12 +234,49 @@ function DisplayAndFillValues(
   }
 }
 
+function ValidateExperienceForm() {
+  const positions = document.querySelectorAll('input[name="position"]');
+  const isPositionsValid = ValidateInputArray(positions, true);
+  const companies = document.querySelectorAll('input[name="company"]');
+  const isCompaniesValid = ValidateInputArray(companies, true);
+  const startDates = document.querySelectorAll('input[name="st"]');
+  const isStartDatesValid = ValidateInputArray(startDates);
+  const endDates = document.querySelectorAll('input[name="en"]');
+  const isEndatesValid = ValidateInputArray(endDates);
+  const descr = document.querySelectorAll('textarea[name="descr"]');
+  const isDescrValid = ValidateInputArray(descr, true);
+
+  if (
+    isPositionsValid &&
+    isCompaniesValid &&
+    isStartDatesValid &&
+    isEndatesValid &&
+    isDescrValid
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function ValidateInputArray(array, checkLength) {
+  let isValid = true;
+  array.forEach(function (input) {
+    if (input.value === "" || (checkLength && input.value.length < 2)) {
+      isValid = false;
+    }
+  });
+  return isValid;
+}
+
 document
   .getElementById(`next-section-education`)
   .addEventListener(`click`, function () {
     console.log("Redirect to next section");
     saveFormToLocalStorage();
-    // location.href = `edu.html`;
+    const isFormValid = ValidateExperienceForm();
+    if (isFormValid) {
+      // location.href = `edu.html`;
+    }
   });
 
 const redirectToPage = function (selector, route) {

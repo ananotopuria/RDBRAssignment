@@ -1,0 +1,7 @@
+.invalid-input {
+  border: 1px solid #f02424 !important;
+}
+
+.valid-input {
+  border: 1px solid #98e37e !important;
+}
