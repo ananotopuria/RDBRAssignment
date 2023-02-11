@@ -60,13 +60,13 @@ function displayInfo(infoFromLocalStroage) {
     // aboutMeLabel.classList.remove(`hidden`);
   }
   if (infoFromLocalStroage.email) {
-    // const displayEmailIcon = document.getElementById(`a-email--icon`);
-    // displayEmailIcon.classList.remove(`hidden`);
+    const displayEmailIcon = document.getElementById(`a-email--icon`);
+    displayEmailIcon.classList.remove(`hidden`);
     displayData("a-email", infoFromLocalStroage.email);
   }
   if (infoFromLocalStroage.phone) {
-    // const displayPhoneIcon = document.getElementById(`a-phone--icon`);
-    // displayPhoneIcon.classList.remove(`hidden`);
+    const displayPhoneIcon = document.getElementById(`a-phone--icon`);
+    displayPhoneIcon.classList.remove(`hidden`);
     displayData("a-phone", infoFromLocalStroage.phone);
   }
 }

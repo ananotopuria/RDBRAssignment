@@ -32,6 +32,7 @@ function getNameAndValidate() {
     nameElement: name,
   };
 }
+
 function validateSurname() {
   let surnameObject = getSurnameAndValidate();
   const surnameError = document.getElementById(`surname-error`);
@@ -98,6 +99,7 @@ function validateEmail() {
   let emailObject = getEmailAndValidate();
   const emailError = document.getElementById(`email-error`);
   displayData("a-email", emailObject.emailElement.value);
+  const displayEmailIcon = document.getElementById(`a-email--icon`);
   if (emailObject.valid) {
     // OK
     emailObject.emailElement.setAttribute("class", "valid-input");
@@ -175,6 +177,7 @@ function validatePhone() {
   let phoneObject = getPhoneAndValidate();
   const phoneError = document.getElementById(`phone-error`);
   displayData("a-phone", phoneObject.phoneElement.value);
+  const displayPhoneIcon = document.getElementById(`a-phone--icon`);
   if (!phoneObject.phoneElement) {
     // Error: element not found
     return true;
