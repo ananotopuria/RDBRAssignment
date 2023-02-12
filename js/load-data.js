@@ -36,10 +36,9 @@ function displayExperience(experienceFromLocalStorage) {
   // if (experienceFromLocalStorage.company && experienceFromLocalStorage.company.length > 0) {
   //   displayValues(experienceFromLocalStorage.company, 'a-company');
   // }
-  if (experienceFromLocalStorage.descr) {
-    displayData(`exp-p--a`, experienceFromLocalStorage.descr);
-  }
-
+  // if (experienceFromLocalStorage.descr) {
+  //   displayData(`exp-p--a`, experienceFromLocalStorage.descr);
+  // }
   // if (experienceFromLocalStorage.dateStart && experienceFromLocalStorage.dateStart.length > 0) {
   //   displayValues(experienceFromLocalStorage.dateStart, 'a-st');
   // }

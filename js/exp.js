@@ -7,7 +7,10 @@ import {
   createInput,
   createP,
   createSpan,
-  DisplayAndFillValues,
+  DisplayExperienceData,
+  CreateExperienceSectionHtml,
+  FillValues,
+  DisplayValues,
 } from "./helper.js";
 
 export function initValidation() {
@@ -158,8 +161,6 @@ window.addEventListener(`load`, (event) => {
   }
 
   fillInputValues();
-  console.log("We have", countEntries);
-  // create
 });
 
 const fillInputValues = function () {
@@ -175,53 +176,33 @@ const fillInputValues = function () {
   if (infoFromLocalStroage.position) {
     // Display data
     if (infoFromLocalStroage.position.length > 0) {
-      DisplayAndFillValues(
-        infoFromLocalStroage.position,
-        "position",
-        "a-position",
-        position
-      );
+      FillValues(infoFromLocalStroage.position, "position", position);
+      DisplayValues(infoFromLocalStroage.position, "a-position");
     }
     // Fill input values
   }
   if (infoFromLocalStroage.company) {
     if (infoFromLocalStroage.company.length > 0) {
-      DisplayAndFillValues(
-        infoFromLocalStroage.company,
-        "company",
-        "a-company",
-        company
-      );
+      FillValues(infoFromLocalStroage.company, "company", company);
+      DisplayValues(infoFromLocalStroage.company, "a-company");
     }
   }
   if (infoFromLocalStroage.descr) {
     if (infoFromLocalStroage.descr.length > 0) {
-      DisplayAndFillValues(
-        infoFromLocalStroage.descr,
-        "descr",
-        "exp-p--a",
-        descr
-      );
+      FillValues(infoFromLocalStroage.descr, "descr", descr);
+      DisplayValues(infoFromLocalStroage.descr, "exp-p--a");
     }
   }
   if (infoFromLocalStroage.dateStart) {
     if (infoFromLocalStroage.dateStart.length > 0) {
-      DisplayAndFillValues(
-        infoFromLocalStroage.dateStart,
-        "start-date",
-        "a-st",
-        startDate
-      );
+      FillValues(infoFromLocalStroage.dateStart, "start-date", startDate);
+      DisplayValues(infoFromLocalStroage.dateStart, "a-st");
     }
   }
   if (infoFromLocalStroage.dateEnd) {
     if (infoFromLocalStroage.dateEnd.length > 0) {
-      DisplayAndFillValues(
-        infoFromLocalStroage.dateEnd,
-        "end-date",
-        "a-en",
-        endDate
-      );
+      FillValues(infoFromLocalStroage.dateEnd, "end-date", endDate);
+      DisplayValues(infoFromLocalStroage.dateEnd, "a-en");
     }
   }
 };
@@ -412,32 +393,7 @@ document.getElementById("addMoreExperience").addEventListener("click", () => {
   descrDiv.appendChild(descrInput);
   descrDiv.appendChild(descError);
 
-  // Display Section ----------------
-  let experienceSection = document.getElementById("section-exp-id");
-  let displayHr = document.createElement("hr");
-  experienceSection.appendChild(displayHr);
-  var displayPositionDiv = document.createElement("div");
-  displayPositionDiv.setAttribute("class", "a-positions");
-  let displayPosition = createP("a-position_" + counter, "a-position");
-  let displayCompany = createP("a-company_" + counter, "a-company");
-  displayPositionDiv.appendChild(displayPosition);
-  displayPositionDiv.appendChild(displayCompany);
-  experienceSection.appendChild(displayPositionDiv);
-
-  let experienceDates = document.createElement("div");
-  experienceDates.setAttribute("id", "dates");
-  experienceDates.setAttribute("class", "exp-dates-aa");
-  let startDate = createP("a-st_" + counter, "start-date-p");
-  let endDate = createP("a-en_" + counter, "end-date-p");
-  experienceDates.appendChild(startDate);
-  experienceDates.appendChild(endDate);
-  experienceSection.appendChild(experienceDates);
-
-  let descriptionDiv = document.createElement("div");
-  descriptionDiv.setAttribute("class", "exp-p--a");
-  descriptionDiv.setAttribute("id", "exp-p--a_" + counter);
-
-  experienceSection.appendChild(descriptionDiv);
+  CreateExperienceSectionHtml(counter);
 
   form.appendChild(positionDiv);
   form.appendChild(companyDiv);

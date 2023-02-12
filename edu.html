@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="imgs/icon.jpg" type="image/icon" />
     <link rel="stylesheet" href="css/edu.css" />
-    <script defer src="js/edu.js"></script>
+    <script type="module">
+       import * as eduModule from "./js/edu.js";
+       eduModule.initValidation();  
+    </script>
     <script type="module">
       import { fillInputValues } from "./js/load-data.js";
       fillInputValues();
@@ -47,7 +50,6 @@
               name="school"
               type="text"
               placeholder="სასწავლებელი"
-              onkeyup="validateSchool()"
             />
             <span id="school-error"></span>
             <p>მინიმუმ 2 სიმბოლო</p>
@@ -61,7 +63,7 @@
             </div>
             <div class="end-date">
               <label for="end">დამთავრების რიცხვი</label>
-              <input id="end-date" name="end" type="date" onChange="validateDateEnd(this)" required/>
+              <input id="end-date" name="end-date" type="date" required/>
             </div>
           </div>
           <div class="edu-descr posit">
@@ -72,7 +74,6 @@
               rows="4"
               cols="107"
               placeholder="განათლების აღწერა"
-              onkeyup="validateDescr()"
             ></textarea>
             <span id="descr-error"></span>
           </div>
@@ -114,7 +115,7 @@
             </div>
           </div>
           <div class="line-aside"></div>
-          <div class="section-exp">
+          <div class="section-exp" id="section-exp-id">
             <h2 class="exp-title title">გამოცდილება</h2>
             <div class="a-positions">
               <p id="a-position" class="a-position"></p>

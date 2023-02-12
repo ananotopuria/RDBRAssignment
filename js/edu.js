@@ -1,14 +1,41 @@
 "use strict";
 
-function displayData(selector, value) {
-  document.getElementById(selector).innerHTML = value;
+import {
+  displayData,
+  getIndexFromElementId,
+  getValuesFromInput,
+  createLabel,
+  createInput,
+  createP,
+  createSpan,
+  DisplayValues,
+  CreateExperienceSectionHtml,
+  DisplayExperienceData,
+} from "./helper.js";
+
+export function initValidation() {
+  document.getElementById(`school`).addEventListener("keyup", (event) => {
+    validateSchool(event.srcElement, true);
+  });
+
+  document.getElementById(`degree`).addEventListener("change", (event) => {
+    validateDegree(event.srcElement, true);
+  });
 }
 
-function validateSchool() {
-  const school = document.getElementById(`school`).value;
-  const schoolError = document.getElementById(`school-error`);
-  displayData(`a-school`, school);
-  // document.getElementById(`a-name`).innerHTML = name;
+function validateDegree(degreeElement, isFirst) {
+  // Make it appear
+}
+
+function validateSchool(schoolElement, isFirst) {
+  const school = schoolElement.value;
+  const schoolError = schoolElement.nextElementSibling;
+  if (isFirst) {
+    displayData(`a-school`, school);
+  } else {
+    let index = getIndexFromElementId(schoolElement);
+    // displayData(`a-school_` + index, school);
+  }
   if (school.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(school)) {
     schoolError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
@@ -19,12 +46,12 @@ function validateSchool() {
 
 function validateDateEnd(input) {
   console.log(input.value);
-  let date = new Date();
+  //TODO?
 }
 
-function validateDescr() {
-  const descrError = document.getElementById(`descr-error`);
-  const descr = document.getElementById(`descr`).value;
+function validateDescr(descriptionElement, isFirst) {
+  const descrError = descriptionElement.nextElementSibling;
+  const descr = descriptionElement.value;
   displayData(`a-descr`, descr);
   if (descr.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(descr)) {
     descrError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
@@ -46,6 +73,15 @@ function saveFormToLocalStorage() {
   // localStorage.setItem("name", document.getElementById("name").value);
   localStorage.setItem(`edu`, JSON.stringify(data));
 }
+
+function fillSelectValues(selectElement, data) {
+  for (var i = 0; i < data.length; i++) {
+    var option = document.createElement("option");
+    option.value = data[i].id;
+    option.text = data[i].title;
+    selectElement.appendChild(option);
+  }
+}
 // when page is loaded fill input values from local storage
 window.addEventListener(`load`, (event) => {
   console.log(`page is fully loaded`);
@@ -54,17 +90,25 @@ window.addEventListener(`load`, (event) => {
   fetch("https://resume.redberryinternship.ge/api/degrees")
     .then((response) => response.json())
     .then((data) => {
-      for (var i = 0; i < data.length; i++) {
-        let select = document.getElementById("degree");
-        var option = document.createElement("option");
-        option.value = data[i].id;
-        option.text = data[i].title;
-        select.appendChild(option);
-      }
+      localStorage.setItem("degree-list", JSON.stringify(data));
+      let select = document.getElementById("degree");
+      fillSelectValues(select, data);
     })
     .catch((error) => {
       console.error("Error:", error);
     });
+
+  // Display Experience Section
+  let experienceData = JSON.parse(localStorage.getItem(`exp`));
+  if (!experienceData) {
+    return;
+  }
+  let countEntries = experienceData.position.length;
+  // Generate HTml and fill values
+  for (let index = 1; index < countEntries; index++) {
+    CreateExperienceSectionHtml(index);
+  }
+  DisplayExperienceData(experienceData);
 });
 
 const fillInputValues = function () {
@@ -115,37 +159,8 @@ const redirectToPrevPage = function (selector, route) {
 };
 
 redirectToPrevPage(`.prev`, `./exp.html`);
-
-function createLabel(classAttribute, forAttribute, value) {
-  let label = document.createElement("label");
-  label.setAttribute("class", classAttribute);
-  label.setAttribute("for", forAttribute);
-  label.innerHTML = value;
-  return label;
-}
-
-function createInput(id, name, type, placeholder, onChangeFunc) {
-  let dateStartInput = document.createElement("input");
-  dateStartInput.setAttribute("id", id);
-  dateStartInput.setAttribute("name", name);
-  dateStartInput.setAttribute("type", type);
-  dateStartInput.setAttribute("placeholder", placeholder);
-  dateStartInput.onchange = onChangeFunc(dateStartInput);
-  return dateStartInput;
-}
-
-function createSpan(id) {
-  let span = document.createElement("span");
-  span.setAttribute("id", "st-error");
-  return span;
-}
-
-function validateDateEnd(input) {
-  console.log(input.value);
-}
-
+let counter = 1;
 document.getElementById("addMoreEducation").addEventListener("click", () => {
-  // console.log("add more");
   let hr = document.createElement("hr");
   let form = document.getElementById("education-form");
   let schoolDiv = document.createElement("div");
@@ -155,51 +170,62 @@ document.getElementById("addMoreEducation").addEventListener("click", () => {
   schoolLabel.setAttribute("for", "school");
   schoolLabel.innerHTML = "სასწავლებელი";
   let schoolInput = document.createElement("input");
-  schoolInput.setAttribute("id", "school");
-  schoolInput.setAttribute("name", "school[]");
+  schoolInput.setAttribute("id", "school_" + counter);
+  schoolInput.setAttribute("name", "school");
   schoolInput.setAttribute("type", "text");
   schoolInput.setAttribute("placeholder", "სასწავლებელი");
-  schoolInput.onkeyup = validateSchool(schoolInput);
+  schoolInput.onkeyup = function () {
+    return validateSchool(schoolInput);
+  };
+  let schoolErrorLabel = createLabel("school-error");
+  schoolErrorLabel.setAttribute("class", "posit");
 
   schoolDiv.appendChild(schoolLabel);
   schoolDiv.appendChild(schoolInput);
+  schoolDiv.appendChild(schoolErrorLabel);
   form.appendChild(schoolDiv);
 
   //degree
-
+  let degreeWrapper = document.createElement("div");
+  degreeWrapper.setAttribute("class", "school-dit posit");
   let degreeDiv = document.createElement("div");
-  degreeDiv.setAttribute("class", "school-dit posit");
+  degreeDiv.setAttribute("class", "degree");
   let degreeLabel = document.createElement("label");
   degreeLabel.setAttribute("for", "degree");
   degreeLabel.innerHTML = "ხარისხი";
   let degreeInput = document.createElement("select");
-  degreeInput.setAttribute("id", "degree");
-  degreeInput.setAttribute("name", "degree[]");
+  degreeInput.setAttribute("id", "degree_" + counter);
+  degreeInput.setAttribute("name", "degree");
   degreeInput.setAttribute("type", "date");
-  // degreeInput.setAttribute("placeholder", "დამსაქმებელი");
-  // degreeInput.onkeyup = validatePosition(degreeInput);
-
+  const degreeListData = JSON.parse(localStorage.getItem("degree-list"));
+  fillSelectValues(degreeInput, degreeListData);
+  degreeInput.onchange = function () {
+    validateDegree(degreeInput);
+  };
   degreeDiv.appendChild(degreeLabel);
   degreeDiv.appendChild(degreeInput);
-  form.appendChild(degreeDiv);
+  degreeWrapper.appendChild(degreeDiv);
 
   //end date
 
   let educationEnd = document.createElement("div");
   educationEnd.setAttribute("class", "end-date");
-  let endLabel = createLabel("end-date", "posit", "დამთავრების რიცხვი");
+  let endLabel = createLabel("", "end", "დამთავრების რიცხვი");
   let endDateInputElement = createInput(
+    "end-date_" + counter,
     "end-date",
-    "en[]",
     "date",
-    "",
-    validateDateEnd
+    ""
   );
+  endDateInputElement.onchange = function () {
+    validateDateEnd(endDateInputElement);
+  };
   var endDateError = createSpan("end-error");
   educationEnd.appendChild(endLabel);
   educationEnd.appendChild(endDateInputElement);
   educationEnd.appendChild(endDateError);
-
+  degreeWrapper.appendChild(educationEnd);
+  form.appendChild(degreeWrapper);
   //descr
 
   let descrDiv = document.createElement("div");
@@ -208,14 +234,16 @@ document.getElementById("addMoreEducation").addEventListener("click", () => {
   descrLabel.setAttribute("for", "descr");
   descrLabel.innerHTML = "აღწერა";
   let descrInput = document.createElement("textarea");
-  descrInput.setAttribute("id", "descr");
-  descrInput.setAttribute("name", "descr[]");
+  descrInput.setAttribute("id", "descr_" + counter);
+  descrInput.setAttribute("name", "descr");
   descrInput.setAttribute("rows", "4");
   descrInput.setAttribute("cols", "107");
   descrInput.setAttribute("placeholder", "როლი თანამდებობაზე და ზოგადი აღწერა");
-  descrInput.onkeyup = validateDescr(descrInput);
-
+  descrInput.onkeyup = function () {
+    validateDescr(descrInput);
+  };
   descrDiv.appendChild(descrLabel);
   descrDiv.appendChild(descrInput);
   form.appendChild(descrDiv);
+  counter++;
 });

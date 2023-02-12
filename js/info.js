@@ -27,7 +27,6 @@ export function initValidation() {
 
   //Handle file
   document.getElementById(`file`).addEventListener("change", (event) => {
-    console.log(event);
     loadFile(event);
   });
 }
@@ -227,7 +226,6 @@ const fillInputValues = function () {
     email.value = infoFromLocalStroage.email;
   }
   if (infoFromLocalStroage.phone) {
-    console.log(infoFromLocalStroage.phone);
     phone.value = infoFromLocalStroage.phone;
   }
 };
