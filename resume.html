@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="imgs/icon.jpg" type="image/icon" />
     <link rel="stylesheet" href="css/resume.css" />
-    <script defer src="./js/resume.js"></script>
+    <script type="module">
+      import * as resumeModule from "./js/resume.js";
+    </script>
     <script type="module">
       import { fillInputValues } from "./js/load-data.js";
       fillInputValues();
@@ -33,7 +35,7 @@
         <p class="about-me" id="about-me--a"></p>
       </div>
       <div class="line"></div>
-      <div class="section-exp">
+      <div class="section-exp" id="section-exp-id">
         <h2 class="exp-title title">გამოცდილება</h2>
         <div class="positions">
           <p class="position" id="a-position"></p>
@@ -46,11 +48,11 @@
         <p class="exp-p" id="exp-p--a"></p>
       </div>
       <div class="line"></div>
-      <div class="section-edu">
+      <div class="section-edu" id="section-edu-id">
         <h2 class="title">განათლება</h2>
         <div class="ed">
           <p class="school" id="a-school"></p>
-          <p class="status"></p>
+          <p class="status" id="a-status"></p>
         </div>
         <p class="edu-dates" id="a-end"></p>
         <p class="edu-p" id="a-descr"></p>

@@ -15,6 +15,7 @@ import {
   FillValues,
   DisplayEducationData,
   ValidateInputArray,
+  CreateEducationSectioHtml,
 } from "./helper.js";
 
 export function initValidation() {
@@ -329,20 +330,7 @@ document.getElementById("addMoreEducation").addEventListener("click", () => {
   descrDiv.appendChild(descrError);
   form.appendChild(descrDiv);
 
-  let educationDisplayDiv = document.createElement("div");
-  educationDisplayDiv.setAttribute("class", "ed");
-  let schoolDisplay = createP("a-school_" + counter, "a-school");
-  let statusDisplay = createP("a-status_" + counter, "a-status");
-  educationDisplayDiv.appendChild(schoolDisplay);
-  educationDisplayDiv.appendChild(statusDisplay);
-  let endDateDisplay = createP("a-end_" + counter, "edu-dates");
-  let descrDisplay = createP("a-descr_" + counter, "edu-p");
-
-  let eduSection = document.getElementById("section-edu-id");
-  eduSection.appendChild(hr);
-  eduSection.appendChild(educationDisplayDiv);
-  eduSection.appendChild(endDateDisplay);
-  eduSection.appendChild(descrDisplay);
+  CreateEducationSectioHtml(counter);
 
   counter++;
 });

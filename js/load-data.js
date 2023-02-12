@@ -1,3 +1,5 @@
+import { displayData } from "./helper.js";
+
 export function fillInputValues() {
   let infoFromLocalStroage = JSON.parse(localStorage.getItem(`info`));
   const profilePicData = localStorage.getItem(`profilePicData`);
@@ -6,14 +8,6 @@ export function fillInputValues() {
   }
   if (infoFromLocalStroage) {
     displayInfo(infoFromLocalStroage);
-  }
-  let experienceFromLocalStorage = JSON.parse(localStorage.getItem(`exp`));
-  if (experienceFromLocalStorage) {
-    displayExperience(experienceFromLocalStorage);
-  }
-  let educationFromLocalStorage = JSON.parse(localStorage.getItem(`edu`));
-  if (educationFromLocalStorage) {
-    displayEducation(educationFromLocalStorage);
   }
 }
 
@@ -27,24 +21,6 @@ function displayEducation(educationFromLocalStorage) {
   if (educationFromLocalStorage.dateEnd) {
     displayData(`a-end`, educationFromLocalStorage.dateEnd);
   }
-}
-
-function displayExperience(experienceFromLocalStorage) {
-  //   if (experienceFromLocalStorage.position && experienceFromLocalStorage.position.length > 0) {
-  //     displayValues(experienceFromLocalStorage.position, 'a-position');
-  //   }
-  // if (experienceFromLocalStorage.company && experienceFromLocalStorage.company.length > 0) {
-  //   displayValues(experienceFromLocalStorage.company, 'a-company');
-  // }
-  // if (experienceFromLocalStorage.descr) {
-  //   displayData(`exp-p--a`, experienceFromLocalStorage.descr);
-  // }
-  // if (experienceFromLocalStorage.dateStart && experienceFromLocalStorage.dateStart.length > 0) {
-  //   displayValues(experienceFromLocalStorage.dateStart, 'a-st');
-  // }
-  //       if (experienceFromLocalStorage.dateEnd && experienceFromLocalStorage.dateEnd.length > 0) {
-  //         displayValues(experienceFromLocalStorage.dateEnd, 'a-en');
-  //       }
 }
 
 function displayValues(array, displaySelector) {
@@ -79,10 +55,6 @@ function displayInfo(infoFromLocalStroage) {
     displayPhoneIcon.classList.remove(`hidden`);
     displayData("a-phone", infoFromLocalStroage.phone);
   }
-}
-
-function displayData(selector, value) {
-  document.getElementById(selector).innerHTML = value;
 }
 
 function displayImage(event, localStorageProfilePic) {

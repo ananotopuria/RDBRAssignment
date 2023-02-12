@@ -70,6 +70,24 @@ export function DisplayValues(array, displaySelector, needsTitle) {
   }
 }
 
+export function CreateEducationSectioHtml(counter) {
+  let educationDisplayDiv = document.createElement("div");
+  educationDisplayDiv.setAttribute("class", "ed");
+  let schoolDisplay = createP("a-school_" + counter, "a-school");
+  let statusDisplay = createP("a-status_" + counter, "a-status");
+  educationDisplayDiv.appendChild(schoolDisplay);
+  educationDisplayDiv.appendChild(statusDisplay);
+  let endDateDisplay = createP("a-end_" + counter, "edu-dates");
+  let descrDisplay = createP("a-descr_" + counter, "edu-p");
+
+  let eduSection = document.getElementById("section-edu-id");
+  let hr = document.createElement("hr");
+  eduSection.appendChild(hr);
+  eduSection.appendChild(educationDisplayDiv);
+  eduSection.appendChild(endDateDisplay);
+  eduSection.appendChild(descrDisplay);
+}
+
 export function CreateExperienceSectionHtml(counter) {
   let experienceSection = document.getElementById("section-exp-id");
   let displayHr = document.createElement("hr");
