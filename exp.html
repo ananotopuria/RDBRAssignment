@@ -7,7 +7,10 @@
     <link rel="icon" href="imgs/icon.jpg" type="image/icon" />
     <link rel="stylesheet" href="css/exp.css" />
     <link rel="stylesheet" href="css/global.css" />
-    <script defer src="js/exp.js"></script>
+    <script type="module">
+           import * as expModule from "./js/exp.js";
+           expModule.initValidation();
+    </script>
     <script type="module">
       import { fillInputValues} from "./js/load-data.js"
       fillInputValues();
@@ -48,7 +51,6 @@
               name="position"
               type="text"
               placeholder="დეველოპერი, დიზაინერი, ა.შ."
-              onkeyup="validatePosition(this, true)"
             />
             <span id="position-error"></span>
             <p>მინიმუმ 2 სიმბოლო</p>
@@ -60,7 +62,6 @@
               name="company"
               type="text"
               placeholder="დამსაქმებელი"
-              onkeyup="validateCompany(this, true)"
             />
             <span id="company-error"></span>
             <p>მინიმუმ 2 სიმბოლო</p>
@@ -68,12 +69,12 @@
           <div class="exp-date">
             <div class="st-date">
               <label for="start-date" class="posit">დაწყების რიცხვი</label>
-              <input id="start-date" name="st" type="date" onChange="validateDateStart(this, true)" required/>
+              <input id="start-date" name="st" type="date" required/>
               <span id="st-error"></span>
             </div>
             <div class="en-date">
               <label for="end-date" class="posit">დამთავრების რიცხვი</label>
-              <input id="end-date" name="en" type="date" onChange="validateDateEnd(this, true)" required/>
+              <input id="end-date" name="en" type="date"required/>
               <span id="en-error"></span>
             </div>
           </div>
@@ -85,7 +86,6 @@
               rows="4"
               cols="107"
               placeholder="როლი თანამდებობაზე და ზოგადი აღწერა"
-              onkeyup="validateDescr(this, true)"
             ></textarea>
             <span id="descr-error"></span>
           </div>

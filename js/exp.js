@@ -1,12 +1,31 @@
 "use strict";
+import {
+  displayData,
+  getIndexFromElementId,
+  getValuesFromInput,
+  createLabel,
+  createInput,
+  createP,
+  createSpan,
+  DisplayAndFillValues,
+} from "./helper.js";
 
-function displayData(selector, value) {
-  document.getElementById(selector).innerHTML = value;
-}
-
-function getIndexFromElementId(element) {
-  let index = element.id.split("_")[1];
-  return index;
+export function initValidation() {
+  document.getElementById(`position`).addEventListener("keyup", (event) => {
+    validatePosition(event.srcElement, true);
+  });
+  document.getElementById(`company`).addEventListener("keyup", (event) => {
+    validateCompany(event.srcElement, true);
+  });
+  document.getElementById(`descr`).addEventListener("keyup", (event) => {
+    validateDescr(event.srcElement, true);
+  });
+  document.getElementById(`start-date`).addEventListener("change", (event) => {
+    validateDateStart(event.srcElement, true);
+  });
+  document.getElementById(`end-date`).addEventListener("change", (event) => {
+    validateDateEnd(event.srcElement, true);
+  });
 }
 
 function validatePosition(positionElement, isFirst) {
@@ -97,10 +116,10 @@ function saveFormToLocalStorage() {
   // Save all form items to local storage
   const data = {
     position: [],
-    company: document.getElementById(`company`).value,
-    descr: document.getElementById(`descr`).value,
-    dateStart: document.getElementById(`start-date`).value,
-    dateEnd: document.getElementById(`end-date`).value,
+    company: [],
+    descr: [],
+    dateStart: [],
+    dateEnd: [],
   };
 
   // position
@@ -122,18 +141,9 @@ function saveFormToLocalStorage() {
   localStorage.setItem(`exp`, JSON.stringify(data));
 }
 
-function getValuesFromInput(element) {
-  let values = [];
-  element.forEach(function (input) {
-    values.push(input.value);
-  });
-  return values;
-}
-
 // when page is loaded fill input values from local storage
 window.addEventListener(`load`, (event) => {
   console.log(`page is fully loaded`);
-  // fillInputValues();
   // calculate how many items in local strage
   let experienceData = JSON.parse(localStorage.getItem(`exp`));
   if (!experienceData) {
@@ -216,24 +226,6 @@ const fillInputValues = function () {
   }
 };
 
-function DisplayAndFillValues(
-  array,
-  inputSelector,
-  displaySelector,
-  firstElement
-) {
-  for (let index = 0; index < array.length; index++) {
-    if (index == 0) {
-      firstElement.value = array[index];
-      displayData(displaySelector, array[index]);
-    } else {
-      var elem = document.getElementById(inputSelector + "_" + index);
-      elem.value = array[index];
-      displayData(displaySelector + "_" + index, array[index]);
-    }
-  }
-}
-
 function ValidateExperienceForm() {
   const positions = document.querySelectorAll('input[name="position"]');
   const isPositionsValid = ValidateInputArray(positions, true);
@@ -275,7 +267,7 @@ document
     saveFormToLocalStorage();
     const isFormValid = ValidateExperienceForm();
     if (isFormValid) {
-      // location.href = `edu.html`;
+      location.href = `edu.html`;
     }
   });
 
@@ -453,44 +445,3 @@ document.getElementById("addMoreExperience").addEventListener("click", () => {
   form.appendChild(descrDiv);
   counter++;
 });
-
-function createLabel(classAttribute, forAttribute, value) {
-  let label = document.createElement("label");
-  label.setAttribute("class", classAttribute);
-  label.setAttribute("for", forAttribute);
-  label.innerHTML = value;
-  return label;
-}
-
-function createInput(
-  id,
-  name,
-  type,
-  placeholder,
-  onChangeOrKeyUpFunc,
-  onKeyUp
-) {
-  let input = document.createElement("input");
-  input.setAttribute("id", id);
-  input.setAttribute("name", name);
-  input.setAttribute("type", type);
-  input.setAttribute("placeholder", placeholder);
-  if (onKeyUp) {
-    return input;
-  }
-  input.onchange = onChangeOrKeyUpFunc(input);
-  return input;
-}
-
-function createP(id, className) {
-  let p = document.createElement("p");
-  p.setAttribute("id", id);
-  p.setAttribute("class", className);
-  return p;
-}
-
-function createSpan(id) {
-  let span = document.createElement("span");
-  span.setAttribute("id", id);
-  return span;
-}

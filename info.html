@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="imgs/icon.jpg" type="image/icon" />
     <link rel="stylesheet" href="css/info.css" />
-    <script defer src="js/info.js"></script>
+    <script type="module">
+      import * as infoModule from "./js/info.js";
+      infoModule.initValidation();
+      infoModule.handlePageLoad();
+      infoModule.handleNextSectionClick();
+    </script>
     <script type="module">
       import { fillInputValues } from "./js/load-data.js";
       fillInputValues();
@@ -49,7 +54,6 @@
                   class="input-field"
                   type="text"
                   placeholder="ანზორ"
-                  onkeyup="validateName()"
                 />
                 <span id="name-error"></span>
                 <p>მინიმუმ 2 ასო, ქართული ასოები</p>
@@ -61,7 +65,6 @@
                   class="input-field"
                   type="text"
                   placeholder="მუმლაძე"
-                  onkeyup="validateSurname()"
                 />
                 <span id="surname-error"></span>
                 <p>მინიმუმ 2 ასო, ქართული ასოები</p>
@@ -79,7 +82,6 @@
                 name="image"
                 id="file"
                 style="display: none"
-                onchange="loadFile(event)"
               />
               <span id="photo-error"></span>
             </div>
@@ -90,7 +92,6 @@
                 name="about-me"
                 type="text"
                 placeholder="ზოგადი ინფო შენ შესახებ"
-                onkeyup="textArea()"
               ></textarea>
             </div>
             <div class="cta-form-contact position">
@@ -102,7 +103,6 @@
                   name="email"
                   type="email"
                   placeholder="anzorr666@redberry.ge"
-                  onkeyup="validateEmail()"
                 />
                 <span id="email-error"></span>
                 <p>უნდა მთავრდებოდეს @redberry.ge-თ</p>
@@ -115,7 +115,6 @@
                   name="number"
                   type="text"
                   placeholder="+995 551 12 34 56"
-                  onkeyup="validatePhone()"
                 />
                 <span id="phone-error"></span>
                 <p>უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს</p>

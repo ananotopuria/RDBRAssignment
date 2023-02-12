@@ -1,6 +1,36 @@
 ("use strict");
 
+import { displayData } from "./helper.js";
+
 const fileError = document.getElementById(`file-error`);
+
+export function initValidation() {
+  document.getElementById(`name`).addEventListener("keyup", (event) => {
+    validateName();
+  });
+  document.getElementById(`surname`).addEventListener("keyup", (event) => {
+    validateSurname();
+  });
+  document.getElementById(`email`).addEventListener("keyup", (event) => {
+    validateEmail();
+  });
+  const phone = document
+    .getElementById(`phone`)
+    .addEventListener("keyup", (event) => {
+      validatePhone();
+    });
+  const about = document
+    .getElementById(`about-me`)
+    .addEventListener("keyup", (event) => {
+      textArea();
+    });
+
+  //Handle file
+  document.getElementById(`file`).addEventListener("change", (event) => {
+    console.log(event);
+    loadFile(event);
+  });
+}
 
 function validateName() {
   let nameObject = getNameAndValidate();
@@ -63,26 +93,6 @@ function getSurnameAndValidate() {
     surnameElement: surname,
   };
 }
-
-function displayData(selector, value) {
-  document.getElementById(selector).innerHTML = value;
-}
-
-// function validateEmail() {
-//   const emailError = document.getElementById(`email-error`);
-//   const email = document.getElementById(`email`).value;
-//   displayData("a-email", email);
-//   const emailRegex = /^[a-zA-Z0-9._-]+@redberry.ge$/;
-//   const displayEmailIcon = document.getElementById(`a-email--icon`);
-//   if (!emailRegex.test(email)) {
-//     emailError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
-//     return false;
-//   }
-//   displayEmailIcon.classList.remove(`hidden`);
-//   emailError.innerHTML = `<ion-icon class="icon-check" name="checkmark-circle"></ion-icon>`;
-//   return true;
-// }
-
 function validateEmail() {
   let emailObject = getEmailAndValidate();
   const emailError = document.getElementById(`email-error`);
@@ -231,35 +241,34 @@ function saveFormToLocalStorage() {
     email: document.getElementById(`email`).value,
     phone: document.getElementById(`phone`).value,
   };
-  // localStorage.setItem("name", document.getElementById("name").value);
   localStorage.setItem(`info`, JSON.stringify(data));
 }
 
-// when page is loaded fill input values from local storage
-window.addEventListener(`load`, (event) => {
-  console.log(`page is fully loaded`);
-  fillInputValues();
-});
-
-document
-  .getElementById(`next-section-experience`)
-  .addEventListener(`click`, function (event) {
-    // Validate form
-    console.log("click event");
-    event.preventDefault();
-    let name = getNameAndValidate();
-    let surname = getSurnameAndValidate();
-    let email = getEmailAndValidate();
-    let phone = getPhoneAndValidate();
-
-    if (name.valid && surname.valid && email.valid && phone.valid == false) {
-      console.log("name.valid", phone.valid);
-      return;
-    }
-    console.log("isValid", name && surname);
-    redirectToRoute("./exp.html");
-    saveFormToLocalStorage();
+export function handlePageLoad() {
+  window.addEventListener(`load`, (event) => {
+    console.log(`page is fully loaded`);
+    fillInputValues();
   });
+}
+
+export function handleNextSectionClick() {
+  document
+    .getElementById(`next-section-experience`)
+    .addEventListener(`click`, function (event) {
+      // Validate form
+      event.preventDefault();
+      let name = getNameAndValidate();
+      let surname = getSurnameAndValidate();
+      let email = getEmailAndValidate();
+      let phone = getPhoneAndValidate();
+
+      if (name.valid && surname.valid && email.valid && phone.valid == false) {
+        return;
+      }
+      saveFormToLocalStorage();
+      redirectToRoute("./exp.html");
+    });
+}
 
 const redirectToPage = function (selector, route) {
   const addNewRecord = document.querySelector(selector);
