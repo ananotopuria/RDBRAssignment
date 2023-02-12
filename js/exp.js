@@ -11,6 +11,7 @@ import {
   CreateExperienceSectionHtml,
   FillValues,
   DisplayValues,
+  ValidateInputArray,
 } from "./helper.js";
 
 export function initValidation() {
@@ -229,16 +230,6 @@ function ValidateExperienceForm() {
     return true;
   }
   return false;
-}
-
-function ValidateInputArray(array, checkLength) {
-  let isValid = true;
-  array.forEach(function (input) {
-    if (input.value === "" || (checkLength && input.value.length < 2)) {
-      isValid = false;
-    }
-  });
-  return isValid;
 }
 
 document

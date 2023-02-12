@@ -56,12 +56,16 @@ export function FillValues(array, inputSelector, firstElement) {
   }
 }
 
-export function DisplayValues(array, displaySelector) {
+export function DisplayValues(array, displaySelector, needsTitle) {
   for (let index = 0; index < array.length; index++) {
+    let value = array[index];
+    if (needsTitle) {
+      value = getDegreeTextFromKey(array[index]);
+    }
     if (index == 0) {
-      displayData(displaySelector, array[index]);
+      displayData(displaySelector, value);
     } else {
-      displayData(displaySelector + "_" + index, array[index]);
+      displayData(displaySelector + "_" + index, value);
     }
   }
 }
@@ -94,6 +98,36 @@ export function CreateExperienceSectionHtml(counter) {
   experienceSection.appendChild(descriptionDiv);
 }
 
+export function DisplayEducationData(educationFromLocalStroage) {
+  if (!educationFromLocalStroage) {
+    return;
+  }
+  if (
+    educationFromLocalStroage.school &&
+    educationFromLocalStroage.school.length > 0
+  ) {
+    DisplayValues(educationFromLocalStroage.school, "a-school");
+  }
+  if (
+    educationFromLocalStroage.degree &&
+    educationFromLocalStroage.degree.length > 0
+  ) {
+    DisplayValues(educationFromLocalStroage.degree, "a-status", true);
+  }
+  if (
+    educationFromLocalStroage.descr &&
+    educationFromLocalStroage.descr.length > 0
+  ) {
+    DisplayValues(educationFromLocalStroage.descr, "a-descr");
+  }
+  if (
+    educationFromLocalStroage.dateEnd &&
+    educationFromLocalStroage.dateEnd.length > 0
+  ) {
+    DisplayValues(educationFromLocalStroage.dateEnd, "a-end");
+  }
+}
+
 export function DisplayExperienceData(infoFromLocalStroage) {
   if (infoFromLocalStroage.position) {
     // Display data
@@ -122,4 +156,25 @@ export function DisplayExperienceData(infoFromLocalStroage) {
       DisplayValues(infoFromLocalStroage.dateEnd, "a-en");
     }
   }
+}
+
+export function getDegreeTextFromKey(key) {
+  let value = "";
+  const degreeList = JSON.parse(localStorage.getItem("degree-list"));
+  degreeList.forEach((element) => {
+    if (element.id == key) {
+      value = element.title;
+    }
+  });
+  return value;
+}
+
+export function ValidateInputArray(array, checkLength) {
+  let isValid = true;
+  array.forEach(function (input) {
+    if (input.value === "" || (checkLength && input.value.length < 2)) {
+      isValid = false;
+    }
+  });
+  return isValid;
 }

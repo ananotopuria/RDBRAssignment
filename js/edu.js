@@ -11,6 +11,10 @@ import {
   DisplayValues,
   CreateExperienceSectionHtml,
   DisplayExperienceData,
+  getDegreeTextFromKey,
+  FillValues,
+  DisplayEducationData,
+  ValidateInputArray,
 } from "./helper.js";
 
 export function initValidation() {
@@ -21,10 +25,25 @@ export function initValidation() {
   document.getElementById(`degree`).addEventListener("change", (event) => {
     validateDegree(event.srcElement, true);
   });
+
+  document.getElementById(`end-date`).addEventListener("change", (event) => {
+    validateDateEnd(event.srcElement, true);
+  });
+
+  document.getElementById(`descr`).addEventListener("keyup", (event) => {
+    validateDescr(event.srcElement, true);
+  });
 }
 
 function validateDegree(degreeElement, isFirst) {
   // Make it appear
+  const title = getDegreeTextFromKey(degreeElement.value);
+  if (isFirst) {
+    displayData(`a-status`, title);
+  } else {
+    let index = getIndexFromElementId(degreeElement);
+    displayData(`a-status_` + index, title);
+  }
 }
 
 function validateSchool(schoolElement, isFirst) {
@@ -34,7 +53,7 @@ function validateSchool(schoolElement, isFirst) {
     displayData(`a-school`, school);
   } else {
     let index = getIndexFromElementId(schoolElement);
-    // displayData(`a-school_` + index, school);
+    displayData(`a-school_` + index, school);
   }
   if (school.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(school)) {
     schoolError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
@@ -44,15 +63,24 @@ function validateSchool(schoolElement, isFirst) {
   return true;
 }
 
-function validateDateEnd(input) {
-  console.log(input.value);
-  //TODO?
+function validateDateEnd(dateElement, isFirst) {
+  if (isFirst) {
+    displayData("a-end", dateElement.value);
+  } else {
+    let index = getIndexFromElementId(dateElement);
+    displayData("a-end_" + index, dateElement.value);
+  }
 }
 
 function validateDescr(descriptionElement, isFirst) {
   const descrError = descriptionElement.nextElementSibling;
   const descr = descriptionElement.value;
-  displayData(`a-descr`, descr);
+  if (isFirst) {
+    displayData(`a-descr`, descr);
+  } else {
+    let index = getIndexFromElementId(descriptionElement);
+    displayData(`a-descr_` + index, descr);
+  }
   if (descr.length < 2 || !/^[ა-ჰa-zA-Z\s]+$/.test(descr)) {
     descrError.innerHTML = `<ion-icon class="icon-warning" name="warning"></ion-icon>`;
     return false;
@@ -64,13 +92,20 @@ function validateDescr(descriptionElement, isFirst) {
 function saveFormToLocalStorage() {
   // Save all form items to local storage
   const data = {
-    school: document.getElementById(`school`).value,
-    dateEnd: document.getElementById(`end-date`).value,
-    // degree: document.getElementById(`degree`).value,
-    // dateEnd: document.getElementById(`end-date`).value,
-    descr: document.getElementById(`descr`).value,
+    school: [],
+    dateEnd: [],
+    degree: [],
+    descr: [],
   };
-  // localStorage.setItem("name", document.getElementById("name").value);
+
+  const school = document.querySelectorAll('input[name="school"]');
+  data.school = getValuesFromInput(school);
+  const dateEnd = document.querySelectorAll('input[name="end-date"]');
+  data.dateEnd = getValuesFromInput(dateEnd);
+  const degree = document.querySelectorAll('select[name="degree"]');
+  data.degree = getValuesFromInput(degree);
+  const descr = document.querySelectorAll('textarea[name="descr"]');
+  data.descr = getValuesFromInput(descr);
   localStorage.setItem(`edu`, JSON.stringify(data));
 }
 
@@ -79,13 +114,13 @@ function fillSelectValues(selectElement, data) {
     var option = document.createElement("option");
     option.value = data[i].id;
     option.text = data[i].title;
+    option.title = data[i].title;
     selectElement.appendChild(option);
   }
 }
 // when page is loaded fill input values from local storage
 window.addEventListener(`load`, (event) => {
   console.log(`page is fully loaded`);
-  fillInputValues();
 
   fetch("https://resume.redberryinternship.ge/api/degrees")
     .then((response) => response.json())
@@ -109,34 +144,82 @@ window.addEventListener(`load`, (event) => {
     CreateExperienceSectionHtml(index);
   }
   DisplayExperienceData(experienceData);
+
+  // Display Education section
+  let educationData = JSON.parse(localStorage.getItem(`edu`));
+  if (!educationData) {
+    return;
+  }
+  let educationEntries = educationData.degree.length;
+  if (educationEntries < 1) {
+    return;
+  }
+  for (let index = 0; index < countEntries - 1; index++) {
+    document.getElementById("addMoreEducation").click();
+  }
+  fillInputValues();
 });
 
 const fillInputValues = function () {
   const school = document.getElementById(`school`);
+  const degree = document.getElementById(`degree`);
   const descr = document.getElementById(`descr`);
   const endDate = document.getElementById(`end-date`);
   let educationFromLocalStroage = JSON.parse(localStorage.getItem(`edu`));
   if (!educationFromLocalStroage) {
     return;
   }
-  if (educationFromLocalStroage.school) {
-    school.value = educationFromLocalStroage.school;
+  if (
+    educationFromLocalStroage.school &&
+    educationFromLocalStroage.school.length > 0
+  ) {
+    FillValues(educationFromLocalStroage.school, "school", school);
   }
-  if (educationFromLocalStroage.descr) {
-    descr.value = educationFromLocalStroage.descr;
+  if (
+    educationFromLocalStroage.degree &&
+    educationFromLocalStroage.degree.length > 0
+  ) {
+    FillValues(educationFromLocalStroage.degree, "degree", degree);
   }
-  // if (educationFromLocalStroage.descr) {
-  //   descr.value = educationFromLocalStroage.descr;
-  // }
-  if (educationFromLocalStroage.dateEnd) {
-    endDate.value = educationFromLocalStroage.dateEnd;
+  if (
+    educationFromLocalStroage.descr &&
+    educationFromLocalStroage.descr.length > 0
+  ) {
+    FillValues(educationFromLocalStroage.descr, "descr", descr);
   }
+  if (
+    educationFromLocalStroage.dateEnd &&
+    educationFromLocalStroage.dateEnd.length > 0
+  ) {
+    FillValues(educationFromLocalStroage.dateEnd, "end-date", endDate);
+  }
+
+  DisplayEducationData(educationFromLocalStroage);
 };
+
+function ValidateEducationForm() {
+  const schools = document.querySelectorAll('input[name="school"]');
+  const isSchoolsValid = ValidateInputArray(schools, true);
+  const degrees = document.querySelectorAll('select[name="degree"]');
+  const isDegreesValid = ValidateInputArray(degrees);
+  const endDates = document.querySelectorAll('input[name="end-date"]');
+  const isEndatesValid = ValidateInputArray(endDates);
+  const descr = document.querySelectorAll('textarea[name="descr"]');
+  const isDescrValid = ValidateInputArray(descr, true);
+
+  if (isSchoolsValid && isDegreesValid && isEndatesValid && isDescrValid) {
+    return true;
+  }
+  return false;
+}
 
 document.getElementById(`next-section`).addEventListener(`click`, function () {
   console.log("Redirect to next section");
   saveFormToLocalStorage();
-  location.href = `resume.html`;
+  if (ValidateEducationForm()) {
+    console.log("Form is valid");
+    location.href = `resume.html`;
+  }
 });
 
 const redirectToPage = function (selector, route) {
@@ -167,7 +250,7 @@ document.getElementById("addMoreEducation").addEventListener("click", () => {
   form.appendChild(hr);
   schoolDiv.setAttribute("class", "school posit");
   let schoolLabel = document.createElement("label");
-  schoolLabel.setAttribute("for", "school");
+  // schoolLabel.setAttribute("for", "school");
   schoolLabel.innerHTML = "სასწავლებელი";
   let schoolInput = document.createElement("input");
   schoolInput.setAttribute("id", "school_" + counter);
@@ -177,9 +260,7 @@ document.getElementById("addMoreEducation").addEventListener("click", () => {
   schoolInput.onkeyup = function () {
     return validateSchool(schoolInput);
   };
-  let schoolErrorLabel = createLabel("school-error");
-  schoolErrorLabel.setAttribute("class", "posit");
-
+  let schoolErrorLabel = createSpan("school-error");
   schoolDiv.appendChild(schoolLabel);
   schoolDiv.appendChild(schoolInput);
   schoolDiv.appendChild(schoolErrorLabel);
@@ -242,8 +323,26 @@ document.getElementById("addMoreEducation").addEventListener("click", () => {
   descrInput.onkeyup = function () {
     validateDescr(descrInput);
   };
+  let descrError = createSpan("descr-error");
   descrDiv.appendChild(descrLabel);
   descrDiv.appendChild(descrInput);
+  descrDiv.appendChild(descrError);
   form.appendChild(descrDiv);
+
+  let educationDisplayDiv = document.createElement("div");
+  educationDisplayDiv.setAttribute("class", "ed");
+  let schoolDisplay = createP("a-school_" + counter, "a-school");
+  let statusDisplay = createP("a-status_" + counter, "a-status");
+  educationDisplayDiv.appendChild(schoolDisplay);
+  educationDisplayDiv.appendChild(statusDisplay);
+  let endDateDisplay = createP("a-end_" + counter, "edu-dates");
+  let descrDisplay = createP("a-descr_" + counter, "edu-p");
+
+  let eduSection = document.getElementById("section-edu-id");
+  eduSection.appendChild(hr);
+  eduSection.appendChild(educationDisplayDiv);
+  eduSection.appendChild(endDateDisplay);
+  eduSection.appendChild(descrDisplay);
+
   counter++;
 });

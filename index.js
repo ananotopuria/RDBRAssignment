@@ -29,22 +29,3 @@ const redirectToNextPage = function (selector, route) {
     location.href = route;
   };
 };
-
-// function displayDataFromLocalStorage() {
-//   var data = {};
-//   for (var i = 0; i < localStorage.length; i++) {
-//     var key = localStorage.key(i);
-//     var value = localStorage.getItem(key);
-//     data[key] = value;
-//   }
-
-//   if (Object.keys(data).length > 0) {
-//     var html = "";
-//     for (var key in data) {
-//       html += "<p>" + key + ": " + data[key] + "</p>";
-//     }
-//     document.getElementById("displayArea").innerHTML = html;
-//   } else {
-//     console.log("No data found in local storage");
-//   }
-// }
